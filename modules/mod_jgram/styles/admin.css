@@ -1,0 +1,214 @@
+h1, h2, h3,
+h4, h5, h6,
+p, a, input,
+li, label,
+legend{
+     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+h5{
+     font-size: 20px;
+}
+
+legend, .hasTooltip{
+     font-size: 10px;
+     clear: both;
+     margin-bottom: 5px;
+     text-transform: uppercase;
+}
+
+.control-group input{
+     padding: 15px;
+}
+
+.form-horizontal .control-group{
+     margin-bottom: 5px;
+}
+
+#jgram-admin  label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+#jgram-admin .number {
+    background: #1abc9c;
+    color: #fff;
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    font-size: 12px;
+    margin-right: 4px;
+    line-height: 30px;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+    border-radius: 15px 15px 15px 0px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="datetime"],
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="time"],
+input[type="url"],
+textarea,
+select ,
+#jgram-admin input,
+.chzn-container-single .chzn-single{
+    background: rgba(255,255,255,.1);
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    margin: 0;
+    outline: 0;
+    padding: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    background-color: #e8eeef;
+    color:#8a97a0;
+    -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.chzn-container-single .chzn-single{
+     height: 45px;
+}
+
+.chzn-container-single .chzn-single abbr{
+     top: 20px;
+}
+
+.chzn-container-single .chzn-single div b{
+     background-position: 0px 15px;
+}
+
+.minicolors-theme-bootstrap .minicolors-input{
+     width: 100%;
+     padding: 15px;
+}
+
+.minicolors-theme-bootstrap .minicolors-swatch{
+     left: 0px;
+}
+
+.input-append .add-on:last-child, .input-append .btn:last-child, .input-append .btn-group:last-child > .dropdown-toggle{
+     margin-top: 5px;
+}
+
+#jgram-admin #jgram-latitude, #jgram-admin #jgram-longitude{
+     width: 48%;
+     float: left;
+}
+
+#jgram-admin #jgram-longitude{
+     float: right;
+}
+
+#jgram-admin input[type="text"]:focus{
+    background: #d2d9dd;
+}
+
+{
+    max-width: 500px;
+    padding: 10px 20px;
+    background: #f4f7f8;
+    margin: 10px auto;
+    padding: 20px;
+    background: #f4f7f8;
+    border-radius: 8px;
+    font-family: Georgia, "Times New Roman", Times, serif;
+}
+ fieldset{
+    border: none;
+}
+
+ label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+ input[type="text"]:focus,
+ input[type="date"]:focus,
+ input[type="datetime"]:focus,
+ input[type="email"]:focus,
+ input[type="number"]:focus,
+ input[type="search"]:focus,
+ input[type="time"]:focus,
+ input[type="url"]:focus,
+ textarea:focus,
+ select:focus{
+    background: #d2d9dd;
+}
+ select{
+    -webkit-appearance: menulist-button;
+    height:35px;
+}
+ .number {
+    background: #1abc9c;
+    color: #fff;
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    font-size: 0.8em;
+    margin-right: 4px;
+    line-height: 30px;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+    border-radius: 15px 15px 15px 0px;
+}
+
+input[type="submit"],
+input[type="button"],
+.jgram-link,
+#jgram-admin button{
+    position: relative;
+    display: block;
+    padding: 10px;
+    color: #FFF;
+    margin: 0 auto;
+    background: #1abc9c;
+    font-size: 12px;
+    text-align: center;
+    font-style: normal;
+    width: 100%;
+    border: 1px solid #16a085;
+    border-width: 1px 1px 3px;
+    margin-bottom: 10px;
+    transition: all 200ms;
+    text-transform: uppercase;
+}
+input[type="submit"]:hover,
+input[type="button"]:hover,
+.jgram-link:hover,
+#jgram-admin button:hover{
+    background: #109177;
+    cursor: pointer;
+}
+
+.form-horizontal .control-label{
+     float: none;
+}
+
+.form-horizontal .controls{
+     margin-left: 0px;
+}
+
+.jgram-link{
+     width: auto;
+     display: block;
+     float: left;
+     margin-right: 5px;
+     padding: 5px;
+     font-size: 12px;
+     text-transform: uppercase;
+     text-decoration: none;
+}
+
+#jgram-location p{
+     font-size: 12px;
+}

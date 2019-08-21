@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <title>jGram Admin</title>
+     <link rel="stylesheet" href="../styles/admin.css">
+</head>
+<body id="jgram-admin">
+     <h5>jGram Setup Helper</h5>
+     <legend>Get User Credentials</legend>
+     <a class="jgram-link" href="http://instagram.pixelunion.net/" target="_blank">Get Client ID</a>
+     <a class="jgram-link" href="http://jelled.com/instagram/lookup-user-id" target="_blank">Get Access Token</a>
+     <legend>Get Location ID</legend>
+     <input id="jgram-accesstoken" type="text" placeholder="access token" value="Your Access Token">
+     <input id="jgram-latitude" type="text" placeholder="latitude" value="45.4986284">
+     <input id="jgram-longitude" type="text" placeholder="longitude" value="-122.4307613">
+     <button style="display: block" id="jgram-get-locations">Get Location</button>
+     <div id="jgram-location"></div>
+     <script src="../js/jquery.js"></script>
+     <script src="../js/admin.js"></script>
+</body>
+</html>

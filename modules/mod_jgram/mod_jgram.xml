@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.1.1" client="site" method="upgrade">
+     <name>JGram</name>
+     <author>Nicholas Eli</author>
+     <version>3.1.1</version>
+     <updateservers>
+         <server type="extension" priority="1" name="jgram">https://raw.githubusercontent.com/NicholasEli/jGram/master/mod_jgram.xml</server>
+     </updateservers>
+     <infourl title="jGram">https://github.com/NicholasEli/jGram#readme</infourl>
+     <downloads>
+        <downloadurl type="full" format="zip">https://github.com/NicholasEli/jGram/archive/master.zip</downloadurl>
+    </downloads>
+    <tags>
+        <tag>stable</tag>
+    </tags>
+    <description><![CDATA[
+        <img src="../modules/mod_jgram/assets/jgram.png" />
+        <p>Simple Instgram feed loader for Joomla!</p>
+        <p>Created by <a href="http://www.nicholasbydesign.co" target="_blank">Nicholas Eli | nicholasbydesign.co</a>.</p>
+        <link rel="stylesheet" href="../modules/mod_jgram/styles/admin.css">
+        <iframe id="jgram-iframe" style="width: 100%; height: 350px; border: none" src="../modules/mod_jgram/admin/jgram-admin.html"></iframe>
+    ]]></description>
+    <files>
+        <filename>mod_jgram.xml</filename>
+        <filename module="mod_jgram">mod_jgram.php</filename>
+        <filename>index.html</filename>
+        <filename>helper.php</filename>
+        <folder>admin</folder>
+        <folder>assets</folder>
+        <folder>tmpl</folder>
+        <folder>js</folder>
+        <folder>styles</folder>
+        <folder>admin</folder>
+    </files>
+
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+
+                <field name="set_up" type="note" label="Set Up"/>
+
+                <field name="get" type="groupedlist" default="tagged"
+                    label="DISPLAY OPTIONS" description="Display user photos or a hastag">
+                    <option value="tagged">Tagged</option>
+                    <option value="user">User</option>
+                    <option value="location">Location</option>
+                </field>
+
+                <field name="tag_name" type="input" label="TAG NAME" description="Hashtag name" filter="safehtml" />
+
+                <field name="location_id" type="input" label="LOCATION ID" description="Get location ID" filter="safehtml" />
+
+                <field name="access_token" type="input" label="ACCESS TOKEN" description="Your Instagram Access Token" filter="safehtml" />
+
+                <field name="user_id" type="input" label="USER ID" description="Your Instagram User Id" filter="safehtml" />
+
+                <field name="note1" type="note" class="alert alert-info" label="Restricting Users" description="You can make photos with specific tags or location to come from account only. i.e. if you tag a photo with #cat, and do not want other users with the tag #cat to appear. Select Yes below" />
+                <field name="restrict_id" type="groupedlist" default="no"
+                    label="ONLY DISPLAY PHOTOS FROM THIS USER ID" description="Restircts photos to this user id.">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </field>
+
+                <!-- display options -->
+                <field name="display_title" type="note" label="Display Options"/>
+
+                <field name="class_name" type="input" label="CLASSNAME(S)" description="Add as many classnames as needed seperated by a space" filter="safehtml" />
+
+                <field name="limit" type="integer" default="10" label="PHOTO LIMIT" description="Specifiy how many photos to display" first="1" last="20" step="1" />
+
+                <field name="columns" type="integer" default="3" label="COLUMNS" description="How many columns should display" first="0" last="12" step="1" />
+
+                <field name="padding" type="integer" default="0" label="PADDING" description="Set space between photos" first="0" last="10" step="1" />
+
+                <field name="backgroundColor" type="color" default="fafafa" label="COLOR" description="Set background color"/>
+
+                <field name="lightbox" type="groupedlist" default="yes"
+                    label="IMAGE LIGHTBOX" description="Opens images in lightbox gallery slider">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </field>
+
+
+                <field name="swiper" type="groupedlist" default="no"
+                    label="TURN FEED INTO SLIDER" description="Turns display feed from grid to swiper js slider">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </field>
+
+                <field name="noBackground" type="groupedlist" default="no"
+                    label="TRANSPARENT BACKGROUND" description="Make background transparent">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </field>
+
+                <field name="profile_display" type="groupedlist" default="no"
+                    label="HIDE USER PROFILE" description="This hides the user profile">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </field>
+
+                <field name="hashtag_display" type="groupedlist" default="no"
+                    label="HIDE HASHTAG" description="This hides the hashtag">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </field>
+
+                <field name="load_jquery" type="note" label="Load jQuery"/>
+                <field name="jquery" type="groupedlist" default="no"
+                    label="Load JQUERY" description="This module is jQuery dependent, you may need to turn this on or off">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </field>
+
+            </fieldset>
+        </fields>
+    </config>
+</extension>
