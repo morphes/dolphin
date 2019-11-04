@@ -1164,7 +1164,10 @@ form label select{
 }
 #field_4, #field_5 {
 	width: 100%;
-} 
+}
+.itemid-153.view-article .title_inner {
+	display: none;
+}
 
 
 
