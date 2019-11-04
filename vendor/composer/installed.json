@@ -1,0 +1,104 @@
+[
+    {
+        "name": "num8er/tranzware-payment-gateway",
+        "version": "1.1.6",
+        "version_normalized": "1.1.6.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/num8er/TranzWarePaymentGatewayApi.git",
+            "reference": "f8720bf577fdcf62260cb1dae4bee1593dd74cff"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/num8er/TranzWarePaymentGatewayApi/zipball/f8720bf577fdcf62260cb1dae4bee1593dd74cff",
+            "reference": "f8720bf577fdcf62260cb1dae4bee1593dd74cff",
+            "shasum": ""
+        },
+        "time": "2018-07-20T14:20:22+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "num8er\\TranzWarePaymentGateway\\": "src/",
+                "num8er\\TranzWarePaymentGateway\\Requests\\": "src/requests/",
+                "num8er\\TranzWarePaymentGateway\\Handlers\\": "src/handlers/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Anar K. Jafarov",
+                "role": "Developer",
+                "email": "anar.k.jafarov@gmail.com",
+                "homepage": "http://anarjafarov.me"
+            }
+        ],
+        "description": "Library for working with TranzWare Payment Gateway"
+    },
+    {
+        "name": "orangedata/orangedata-client",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/orangedata-official/PHP-OrangeData-official.git",
+            "reference": "c1a945e4d5e45bf658aeda8e035de71877683d98"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/orangedata-official/PHP-OrangeData-official/zipball/c1a945e4d5e45bf658aeda8e035de71877683d98",
+            "reference": "c1a945e4d5e45bf658aeda8e035de71877683d98",
+            "shasum": ""
+        },
+        "time": "2017-11-21T11:21:56+00:00",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "orangedata\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "authors": [
+            {
+                "name": "patyrsa",
+                "email": "patyrsa@com.gmail"
+            }
+        ],
+        "description": "Example client API class for OrangeData project"
+    },
+    {
+        "name": "morphes/limeit",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/morphes/lime.git",
+            "reference": "749a952288877086da329e65cd2bc4d4dab01666"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/morphes/lime/zipball/749a952288877086da329e65cd2bc4d4dab01666",
+            "reference": "749a952288877086da329e65cd2bc4d4dab01666",
+            "shasum": ""
+        },
+        "time": "2019-09-04T11:21:21+00:00",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "Lime": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "authors": [
+            {
+                "name": "Dmitry Sazonov",
+                "email": "sazon@nxt.ru"
+            }
+        ]
+    }
+]
