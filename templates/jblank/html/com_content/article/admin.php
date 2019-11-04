@@ -1,14 +1,24 @@
 <?php
 require_once( dirname(__FILE__).'/form.lib.php' );
 
+define( '_JEXEC', 1 );
+define('JPATH_BASE', '../../../../..' );//point to joomla root
+define( 'DS', DIRECTORY_SEPARATOR );
+require_once ( JPATH_BASE .DS.'includes'.DS.'defines.php' );
+require_once ( JPATH_BASE .DS.'includes'.DS.'framework.php' );
+
 define( 'PHPFMG_USER', "nikolayblinov@yandex.ru" ); // must be a email address. for sending password to you.
 define( 'PHPFMG_PW', "3c2294" );
-
+$projectPart = '/../../../../..';
+require_once( dirname(__FILE__). $projectPart . '/vendor/autoload.php' );
 ?>
+
 <?php
 /**
  * GNU Library or Lesser General Public License version 2.0 (LGPLv2)
 */
+use num8er\TranzWarePaymentGateway\TranzWarePaymentGatewayRequestFactory;
+use num8er\TranzWarePaymentGateway\CurrencyCodes;
 
 # main
 # ------------------------------------------------------
@@ -36,25 +46,117 @@ function phpfmg_admin_main(){
     return phpfmg_user_isLogin() ? $function() : phpfmg_admin_default();
 }
 
-function phpfmg_ajax_submit(){
-    $phpfmg_send = phpfmg_sendmail( $GLOBALS['form_mail'] );
-    $isHideForm  = isset($phpfmg_send['isHideForm']) ? $phpfmg_send['isHideForm'] : false;
+function phpfmg_ajax_submit()
+{
+    if(isset($_POST['type'])) {
+        $phpfmg_send = phpfmg_sendmail( $GLOBALS['form_mail'] );
+        $isHideForm  = isset($phpfmg_send['isHideForm']) ? $phpfmg_send['isHideForm'] : false;
+        if($_POST['type'] == 'kupit') {
+            $prices = file_get_contents(dirname(__FILE__).'/prices.json');
+            $prices = @json_decode($prices, true);
+            $totalPrice = 0;
+            $totalQty = 0;
+            foreach($_POST as $keyField => $postField) {
+                $keyCheckField = str_replace('field_', '', $keyField);
+                if (is_numeric($keyCheckField)) {
+                    if (isset($prices[$keyCheckField])) {
+                        if (
+                            (strlen($_POST['field_7']) > 35 && in_array($keyCheckField, [5, 6])) ||
+                            (strlen($_POST['field_7']) < 35 && in_array($keyCheckField, [8, 9, 10, 11, 12, 13]))
+                        ) {
+                            $totalPrice += $prices[$keyCheckField]['price'] * (int)$_POST[$keyField];
+                            $totalQty   += (int)$_POST[$keyField];
+                        }
+                    }
+                }
+            }
 
-    $response = array(
-        'ok' => $isHideForm,
-        'error_fields' => isset($phpfmg_send['error']) ? $phpfmg_send['error']['fields'] : '',
-        'OneEntry' => isset($GLOBALS['OneEntry']) ? $GLOBALS['OneEntry'] : '',
-    );
-    
-    @header("Content-Type:text/html; charset=$charset");
-    echo "<html><body><script>
-    var response = " . json_encode( $response ) . ";
-    try{
-        parent.fmgHandler.onResponse( response );
-    }catch(E){};
-    \n\n";
-    echo "\n\n</script></body></html>";
+            $data = $_POST;
 
+            $db = JFactory::getDbo();
+            $query = $db->getQuery(true);
+            $order = new stdClass();
+            $order->fio = $data['field_0'];
+            $order->phone = $data['field_1'];
+            $order->time = $data['field_2'];
+            $order->day = $data['field_3'];
+            $order->month = $data['field_4'];
+            $order->email = $data['field_12'];
+            if(strlen($_POST['field_7']) > 35) {
+                $order->dolphin_adult = $data['field_5'];
+                $order->dolphin_communication = $data['field_6'];
+            } else {
+                $order->show_adult = $data['field_8'];
+                $order->show_adult_vip = $data['field_9'];
+                $order->show_child = $data['field_10'];
+                $order->show_child_vip = $data['field_11'];
+                $order->show_babies = $data['field_12'];
+                $order->show_priviliges = $data['field_13'];
+            }
+            $order->total_price = $totalPrice;
+            $order->total_qty = $totalQty;
+            JFactory::getDbo()->insertObject('#__order', $order, 'id');
+
+            $description = ' на ' . $data['field_3'] . ' ' . $data['field_4'];
+            if(isset($data['field_5']) && isset($data['field_6'])) {
+                $description = 'Заказ: #' . $order->id . '; Кол-во билетов: ' . ($totalQty). '; дата '. $description;
+            }
+
+            $requestFactory = new TranzWarePaymentGatewayRequestFactory(
+                'https://ipay.genbank.ru:8444/Exec',
+                'DOLPHIN',
+                'http://dolphin:8888/index.php?option=com_payment',
+                'http://dolphin:8888/index.php?option=com_payment',
+                'http://dolphin:8888/index.php?option=com_payment',
+                'EN'
+            );
+            $projectPart = '/../../../../..';
+            $keyFile = dirname(__FILE__) . $projectPart . '/certificates/finalpem.pem';
+            $keyPass = file_get_contents(dirname(__FILE__) . $projectPart .'/certificates/your-private-key-pass.txt');
+            $certFile = dirname(__FILE__) . $projectPart .'/certificates/dolphinevpatoria.ru.crt';
+            $requestFactory->setCertificate($certFile, $keyFile, $keyPass);
+            $requestFactory->setDebugFile(dirname(__FILE__) . $projectPart .'/debug.log');
+            $orderRequest = $requestFactory->createOrderRequest($totalPrice * 100, CurrencyCodes::RUB, $description);
+            $orderRequestResult = $orderRequest->execute();
+
+            if ($orderRequestResult->success()) {
+                $orderData = $orderRequestResult->getData();
+                $redirect = $orderData['PaymentUrl'];
+                $response = array(
+                    'ok' => $isHideForm,
+                    'error_fields' => isset($phpfmg_send['error']) ? $phpfmg_send['error']['fields'] : '',
+                    'OneEntry' => isset($GLOBALS['OneEntry']) ? $GLOBALS['OneEntry'] : '',
+                    'redirect' => $redirect
+                );
+
+                @header("Content-Type:text/html; charset=$charset");
+                echo "<html><body><script>
+                    var response = " . json_encode( $response ) . ";
+                    try{
+                        parent.fmgHandler.onResponse( response );
+                    }catch(E){};
+                    \n\n";
+                                echo "\n\n</script></body></html>";
+                            }
+            } else {
+                $isHideForm  = isset($phpfmg_send['isHideForm']) ? $phpfmg_send['isHideForm'] : false;
+
+                $response = array(
+                    'ok' => $isHideForm,
+                    'error_fields' => isset($phpfmg_send['error']) ? $phpfmg_send['error']['fields'] : '',
+                    'OneEntry' => isset($GLOBALS['OneEntry']) ? $GLOBALS['OneEntry'] : '',
+                );
+            }
+        }
+
+        @header("Content-Type:text/html; charset=$charset");
+        echo "<html><body><script>
+            var response = " . json_encode( $response ) . ";
+            try{
+                parent.fmgHandler.onResponse( response );
+            }catch(E){};
+            \n\n";
+        echo "\n\n</script></body></html>";
 }
 
 

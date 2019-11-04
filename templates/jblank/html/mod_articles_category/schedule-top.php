@@ -30,8 +30,11 @@ defined('_JEXEC') or die;
 		<?php endforeach; ?>
 	</div>
 
-    <a href="/zabronirovat.html">
+    <a href="/kupit.html">
         Купить билет
+    </a>
+    <a href="/zabronirovat.html">
+        Забронировать
     </a>
     <div class="clear"></div>
 </div>

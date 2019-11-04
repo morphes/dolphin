@@ -30,14 +30,6 @@ defined('_JEXEC') or die;
 		<?php foreach ($list as $group_name => $group) : ?>
 		<li>
 			<ul class="ul_routine">
-				<?php foreach ($group as $item) : ?>
-				<li>
-					<b>
-						<?php echo $item->title; ?>
-					</b>
-					<?php echo $item->displayIntrotext; ?>
-				</li>
-				<?php endforeach; ?>
 			</ul>
 			<p>
 				* Начало сеансов  уточняйте за сутки

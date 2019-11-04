@@ -20,11 +20,11 @@ $user    = JFactory::getUser();
 $info    = $params->get('info_block_position', 0);
 JHtml::_('behavior.caption');
 ?>
-<div class="left_content innner_page">	 
+<div class="left_content innner_page">
 
 	<?php if (isset($images->image_fulltext) && !empty($images->image_fulltext)) : ?>
 	<?php $imgfloat = (empty($images->float_fulltext)) ? $params->get('float_fulltext') : $images->float_fulltext; ?>
-	<div class="img_inner"> 
+	<div class="img_inner">
 		<img <?php if ($images->image_fulltext_caption):
 		echo 'class="caption"' . ' title="' . htmlspecialchars($images->image_fulltext_caption) . '"';
 	endif; ?>
