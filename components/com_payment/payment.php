@@ -6,6 +6,8 @@ $projectPart = '/../..';
 require_once( dirname(__FILE__). $projectPart . '/vendor/autoload.php' );
 include_once 'orangedata_client.php';
 require_once __DIR__ . '/QR/qrlib.php';
+include_once(__DIR__ . '/letter.php');
+$domain = 'http://payment.dolphinevpatoria.ru/';
 use Lime\Request;
 
 if (isset($_POST['xmlmsg'])) {
@@ -88,9 +90,20 @@ if (isset($_POST['xmlmsg'])) {
                     $qrs = $request->order($items);
 
                     foreach($qrs as $key => $qr) {
-                        QRcode::png($qr, __DIR__ . "/tickets/" . $orderNumber . "-" . $key . ".png", QR_ECLEVEL_L, 10);
+                        $qrFilename = __DIR__ . "/tickets/" . $orderNumber . "-" . $key . ".png";
+                        QRcode::png($qr, $qrFilename, QR_ECLEVEL_L, 10);
+                        $params = [
+                            'qr' => $qrFilename,
+                            'domain' => $domain,
+                            'date' => '19.10.2019',
+                            'price' => '1456',
+                            'time' => '18:00'
+                        ];
+                        $letterTemplate = letterTemplate();
+                        $content = template($letterTemplate, $params);
+                        mailAttachments( PHPFMG_USER, "Password for Your Form Admin Panel", $body, PHPFMG_USER, 'You', "You <" . PHPFMG_USER . ">" );
                     }
-                    header('Location: http://dolphin:8888/templates/jblank/html/com_content/article/success.php', true, 301);
+                    header('Location: '.$domain.'templates/jblank/html/com_content/article/success.php', true, 301);
                     exit;
                 }
             }

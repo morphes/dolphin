@@ -10,6 +10,7 @@ require_once ( JPATH_BASE .DS.'includes'.DS.'framework.php' );
 define( 'PHPFMG_USER', "nikolayblinov@yandex.ru" ); // must be a email address. for sending password to you.
 define( 'PHPFMG_PW', "3c2294" );
 $projectPart = '/../../../../..';
+
 require_once( dirname(__FILE__). $projectPart . '/vendor/autoload.php' );
 ?>
 
@@ -48,6 +49,7 @@ function phpfmg_admin_main(){
 
 function phpfmg_ajax_submit()
 {
+    $domain = 'http://payment.dolphinevpatoria.ru/';
     if(isset($_POST['type'])) {
         $phpfmg_send = phpfmg_sendmail( $GLOBALS['form_mail'] );
         $isHideForm  = isset($phpfmg_send['isHideForm']) ? $phpfmg_send['isHideForm'] : false;
@@ -99,15 +101,15 @@ function phpfmg_ajax_submit()
 
             $description = ' на ' . $data['field_3'] . ' ' . $data['field_4'];
             if(isset($data['field_5']) && isset($data['field_6'])) {
-                $description = 'Заказ: #' . $order->id . '; Кол-во билетов: ' . ($totalQty). '; дата '. $description;
+                $description = 'Заказ: #' . $order->id . '; Кол-во билетов: ' . ($totalQty). '; дата: '. $description . '; время: ' . $order->time.'; email: ' . $order->email;
             }
 
             $requestFactory = new TranzWarePaymentGatewayRequestFactory(
                 'https://ipay.genbank.ru:8444/Exec',
                 'DOLPHIN',
-                'http://dolphin:8888/index.php?option=com_payment',
-                'http://dolphin:8888/index.php?option=com_payment',
-                'http://dolphin:8888/index.php?option=com_payment',
+                $domain. 'index.php?option=com_payment',
+                $domain. 'index.php?option=com_payment',
+                $domain. 'index.php?option=com_payment',
                 'EN'
             );
             $projectPart = '/../../../../..';
