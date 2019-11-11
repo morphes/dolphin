@@ -6,6 +6,7 @@ $projectPart = '/../..';
 require_once( dirname(__FILE__). $projectPart . '/vendor/autoload.php' );
 include_once 'orangedata_client.php';
 require_once __DIR__ . '/QR/qrlib.php';
+require_once( dirname(__FILE__). $projectPart . '/templates/jblank/html/com_content/article/form.lib.php' );
 include_once(__DIR__ . '/letter.php');
 $domain = 'http://payment.dolphinevpatoria.ru/';
 use Lime\Request;
@@ -19,7 +20,7 @@ if (isset($_POST['xmlmsg'])) {
             echo 'Заказ отменен';
         }
 
-        if($status == 'APPROVED') {
+        if($status == 'APPROVED' || $status == 'ERROR') {
             $api_url = 12003;
 
             $sign_pkey = getcwd() . '/certificates/orange_live/signpkey.pem';
@@ -29,6 +30,7 @@ if (isset($_POST['xmlmsg'])) {
             $ssl_client_crt_pass = '';
             $inn = '9110001780';
             $phone = '79889917443';
+
             if(isset($paymentMessage['OrderDescription'])) {
                 $orderNumber = (int)explode('#', $paymentMessage['OrderDescription'])[1];
                 if($orderNumber) {
@@ -88,20 +90,23 @@ if (isset($_POST['xmlmsg'])) {
                     }
 
                     $qrs = $request->order($items);
-
                     foreach($qrs as $key => $qr) {
-                        $qrFilename = __DIR__ . "/tickets/" . $orderNumber . "-" . $key . ".png";
+                        $qrFilename = dirname(__FILE__). $projectPart .  "/media/" . $orderNumber . "-" . $key . ".png";
+
+                        $qrFilePath = str_replace(dirname(__FILE__). $projectPart . '/', '', $qrFilename);
                         QRcode::png($qr, $qrFilename, QR_ECLEVEL_L, 10);
                         $params = [
-                            'qr' => $qrFilename,
+                            'qr' => $qrFilePath,
                             'domain' => $domain,
-                            'date' => '19.10.2019',
-                            'price' => '1456',
-                            'time' => '18:00'
+                            'date' => $order->day . ' ' . $order->month,
+                            'price' => $order->total_price,
+                            'time' => $order->time
                         ];
                         $letterTemplate = letterTemplate();
                         $content = template($letterTemplate, $params);
-                        mailAttachments( PHPFMG_USER, "Password for Your Form Admin Panel", $body, PHPFMG_USER, 'You', "You <" . PHPFMG_USER . ">" );
+                        var_dump($content);
+                        die();
+                        mailAttachments( $order->email, "Ваш билет", $content);
                     }
                     header('Location: '.$domain.'templates/jblank/html/com_content/article/success.php', true, 301);
                     exit;

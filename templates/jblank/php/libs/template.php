@@ -857,4 +857,19 @@ class JBlankTemplate
         }
     }
 
+    public function getIsBlocked()
+    {
+        $db = JFactory::getDbo();
+        $query = $db->getQuery(true);
+        $query->select('*')->from($db->quoteName('#__booking'))->group('start, title');
+        $db->setQuery($query);
+        $bookings = $db->loadObjectList();
+        foreach($bookings as $booking) {
+            if($booking->title == 'Отмена бронирования' && date('Y-m-d', time()) == $booking->start) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

@@ -100,9 +100,9 @@ function phpfmg_ajax_submit()
             JFactory::getDbo()->insertObject('#__order', $order, 'id');
 
             $description = ' на ' . $data['field_3'] . ' ' . $data['field_4'];
-            if(isset($data['field_5']) && isset($data['field_6'])) {
-                $description = 'Заказ: #' . $order->id . '; Кол-во билетов: ' . ($totalQty). '; дата: '. $description . '; время: ' . $order->time.'; email: ' . $order->email;
-            }
+//            if(isset($data['field_5']) && isset($data['field_6'])) {
+                $description = 'Заказ: #' . $order->id . '; Кол-во билетов: ' . ($totalQty). '; дата:'. $description . '; время: ' . $order->time.'; email: ' . $order->email;
+//            }
 
             $requestFactory = new TranzWarePaymentGatewayRequestFactory(
                 'https://ipay.genbank.ru:8444/Exec',

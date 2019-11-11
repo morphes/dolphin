@@ -183,7 +183,7 @@ foreach($bookings as $booking) {
                         <br/>
                         <span>Льготные билеты возможно приобрести только в кассах дельфинария при предъявлении оригиналов соответствующих документов</span>
                     </label>
-                    <input type='submit' value='Забронировать билет' class='form_button'>
+                    <input type='submit' value='Купить билет' class='form_button'>
                 </div>
 
                 <div id='err_required' class="form_error" style='display:none;'>

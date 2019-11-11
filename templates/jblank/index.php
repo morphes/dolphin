@@ -4,13 +4,14 @@ require dirname(__FILE__) . '/php/init.php';
 //$this->setHeadData($headlink);
 if (isset($this->_script['text/javascript']))
     {
-    $this->_script['text/javascript'] = preg_replace('%jQuery\(window\)\.on\(\'load\',\s*function\(\)\s*{\s*new\s*JCaption\(\'img.caption\'\);\s*}\);\s*%', '', $this->_script['text/javascript']); 
+    $this->_script['text/javascript'] = preg_replace('%jQuery\(window\)\.on\(\'load\',\s*function\(\)\s*{\s*new\s*JCaption\(\'img.caption\'\);\s*}\);\s*%', '', $this->_script['text/javascript']);
     if (empty($this->_script['text/javascript']))
-        unset($this->_script['text/javascript']); 
+        unset($this->_script['text/javascript']);
     }
+    $isBlocked = $tpl->getIsBlocked();
 ?>
 <?php echo $tpl->renderHTML(); ?>
-<head> 
+<head>
 
     <jdoc:include type="head" />
     <script type="text/javascript">
@@ -62,10 +63,63 @@ if (isset($this->_script['text/javascript']))
             </div>
         </div>
     </header>
-    <?php if ($tpl->isFront()) { ?>  
+    <?php if ($tpl->isFront()) { ?>
     <div class="slider_wrap">
         <div class="flexslider">
             <nav>
+                <style>
+                    .popup-bkg {
+                        background: no-repeat url(/media/popup.png);
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        text-align: center;
+                        padding-top: 140px;
+                        position: relative;
+                    }
+                    .popup-wrapper {
+                        width: 769px;
+                        height: 361px;
+                        margin: auto;
+                        z-index: 1000;
+                    }
+                    #popup-block {
+                        width: 100%;
+                        margin-top: 190px;
+                        height: 361px;
+                        position: absolute;
+                        z-index: 1000;
+                    }
+                    .popup-close {
+                        position: relative;
+                        width: 26px;
+                        height: 26px;
+                        left: 730px;
+                        top: 39px;
+                        z-index: 1000;
+                    }
+                    .popup-main-text {
+                        color: #074cb3;
+                        font-size: 32px;
+                        line-height: 22px;
+                        font-family: 'OpenSans-Extrabold';
+                    }
+                    .popup-additional-text {
+                        color: rgb(79,79,79);
+                        font-size: 24px;
+                        font-family: 'OpenSans-Bold';
+                    }
+                    .popup-close {
+                        cursor:pointer;
+                    }
+                </style>
+                <script type="text/javascript">
+                    $(document).ready(function(){
+                        $('.popup-close').click(function(){
+                            $('#popup-block').css('visibility','hidden');
+                        });
+                    });
+                </script>
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12">
@@ -79,6 +133,22 @@ if (isset($this->_script['text/javascript']))
                     </div>
                 </div>
             </nav>
+            <?php if($isBlocked) { ?>
+                <div id="popup-block">
+                    <div class="popup-wrapper">
+                        <div class="popup-close">
+                            <img src="/media/close.png"/>
+                        </div>
+                        <div class="popup-bkg">
+                            <div class="popup-message">
+                                <span class="popup-main-text">Продажа билетов приостановлена!</span><br/><br/>
+                                <span class="popup-additional-text">Информацию уточняйте по телефону</span><br/>
+                                <span class="popup-additional-text">+7(978)855-46-51</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
             <jdoc:include type="modules" name="slider" />
         </div>
     </div>
@@ -89,12 +159,12 @@ if (isset($this->_script['text/javascript']))
                     <jdoc:include type="modules" name="schedule-module" />
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 right_location">
-                    <jdoc:include type="modules" name="contact-module" /> 
+                    <jdoc:include type="modules" name="contact-module" />
                 </div>
             </div>
         </div>
     </section>
-    <?php } else { ?> 
+    <?php } else { ?>
     <nav class='inner_nav'>
         <div class="container-fluid">
             <div class="row">
@@ -116,7 +186,7 @@ if (isset($this->_script['text/javascript']))
             <div class="row">
                 <div class="col-lg-12">
                     <jdoc:include type="modules" name="breadcrumbs" />
-                    <h1> 
+                    <h1>
                         <?php
                         $delimiter_pos = 0;
                         $delimiter_pos = stripos($this->getTitle(), ' - ') + 3;
@@ -150,7 +220,7 @@ if (isset($this->_script['text/javascript']))
                         <jdoc:include type="modules" name="schedule-module" />
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 right_location">
-                        <jdoc:include type="modules" name="contact-module" />                        
+                        <jdoc:include type="modules" name="contact-module" />
                     </div>
                 </div>
             </div>
@@ -164,7 +234,7 @@ if (isset($this->_script['text/javascript']))
     <footer>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-12">  
+                <div class="col-lg-12">
 
                 <form class="dispatch" method="POST" action="https://cp.unisender.com/ru/subscribe?hash=5dk4h78cgmquc3epbdcc3k5t4srkekypdijgq41mfusq6wuepsn1o" name="subscribtion_form">
                     <div class="text_input">
