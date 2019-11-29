@@ -86,11 +86,18 @@ $db = JFactory::getDbo();
                     <label class='form_field'>
                         <span>Месяц</span>
                         <?php $months = [
+                            '01' => 'Январь',
+                            '02' => 'Февраль',
+                            '03' => 'Март',
+                            '04' => 'Апрель',
+                            '05' => 'Май',
                             '06' => 'Июнь',
                             '07' => 'Июль',
                             '08' => 'Август',
                             '09' => 'Сентябрь',
-                            '10' => 'Октябрь'
+                            '10' => 'Октябрь',
+                            '11' => 'Ноябрь',
+                            '12' => 'Декабрь'
                         ];
                         if (isset($months[date('m')])) {
                             $months[date('m')] .= '=' . $months[date('m')] . ',default';
@@ -119,26 +126,12 @@ $db = JFactory::getDbo();
                         </label>
                         <div id='field_8_tip' class='instruction'></div>
                     </li>
-                    <li class='field_block' id='field_9_div' price="<?php echo $prices[9]['price']; ?>">
-                        <label class='form_field'>
-                            <span>Кол-во взрослых VIP-мест</span>
-                            <?php phpfmg_dropdown('field_9', "0=0,default|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|&gt;20"); ?>
-                        </label>
-                        <div id='field_9_tip' class='instruction'></div>
-                    </li>
                     <li class='field_block' id='field_10_div' price="<?php echo $prices[10]['price']; ?>">
                         <label class='form_field'>
                             <span>Детские места (5-11)</span>
                             <?php phpfmg_dropdown('field_10', "0=0,default|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|&gt;20"); ?>
                         </label>
                         <div id='field_10_tip' class='instruction'></div>
-                    </li>
-                    <li class='field_block' id='field_11_div' price="<?php echo $prices[11]['price']; ?>">
-                        <label class='form_field'>
-                            <span>Детские места VIP</span>
-                            <?php phpfmg_dropdown('field_11', "0=0,default|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|&gt;20"); ?>
-                        </label>
-                        <div id='field_11_tip' class='instruction'></div>
                     </li>
                 </div>
 
@@ -173,7 +166,7 @@ $db = JFactory::getDbo();
                         <label class="form_field">
                             <span>Внимание! Бронирование билетов производится за сутки! Забронированные билеты необходимо выкупить в кассе дельфинария не позднее, чем за 30 минут до начала представления!</span>
                             <br/>
-                            <span>Льготные билеты возможно приобрести только в кассах дельфинария при предъявлении оригиналов соответствующих документов</span>
+                            <span style="color: red;">Льготные билеты возможно приобрести только в кассах дельфинария при предъявлении оригиналов соответствующих документов</span>
                         </label>
                         <input type='submit' value='Забронировать билет' class='form_button'>
                     </div>
@@ -184,7 +177,7 @@ $db = JFactory::getDbo();
 
 
                     <span id='phpfmg_processing' style='display:none;'>
-        <img id='phpfmg_processing_gif' src='<?php echo PHPFMG_ADMIN_URL . '?mod=image&amp;func=processing'; ?>'
+        <img id='phpfmg_processing_gif' src='/images/giphy.gif'
              border=0 alt='Processing...'> <label id='phpfmg_processing_dots'></label>
     </span>
                 </li>

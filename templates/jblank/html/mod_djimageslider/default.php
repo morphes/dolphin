@@ -1,12 +1,12 @@
 <?php
-defined('_JEXEC') or die ('Restricted access'); 
+defined('_JEXEC') or die ('Restricted access');
 $wcag = $params->get('wcag', 1) ? ' tabindex="0"' : ''; ?>
 <ul class="slides">
-		<?php foreach ($slides as $slide) { 
+		<?php foreach ($slides as $slide) {
 			$rel = ($slide->rel ? 'rel="'.$slide->rel.'"':''); ?>
 			<li>
 			<div class="position_slides">
-			  <div class="wrap_text_sliders">	
+			  <div class="wrap_text_sliders">
 			  	<div class="prevu_slider">
                     <?php echo $slide->description; ?>
                 </div>
@@ -16,10 +16,13 @@ $wcag = $params->get('wcag', 1) ? ' tabindex="0"' : ''; ?>
                 <a href="<?php echo $slide->link; ?>" class='links_slider'>
                     <?php echo ($params->get('readmore_text',0) ? $params->get('readmore_text') : JText::_('MOD_DJIMAGESLIDER_READMORE')); ?>
                 </a>
-				
+                  <a href="/kupit.html" class="links_slider">
+                      Купить билет
+                  </a>
+
 			  </div>
 			</div>
-			<img class="dj-image" src="<?php echo $slide->image; ?>" alt="<?php echo $slide->alt; ?>"/>										
+			<img class="dj-image" src="<?php echo $slide->image; ?>" alt="<?php echo $slide->alt; ?>"/>
 		</li>
     <?php } ?>
 </ul>
@@ -43,5 +46,4 @@ $wcag = $params->get('wcag', 1) ? ' tabindex="0"' : ''; ?>
         </li>
     </ul>
 </div>
- 
- 
+
