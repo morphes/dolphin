@@ -222,11 +222,17 @@ foreach($bookings as $booking) {
     $(document).ready(function () {
         var bookings = JSON.parse($('#bookings').val());
         var months = {
+            'Январь': 1,
+            'Февраль': 2,
+            'Март': 3,
+            'Апрель': 4,
             'Июнь': 5,
             'Июль': 6,
             'Август': 7,
             'Сентябрь': 8,
-            'Октябрь': 9
+            'Октябрь': 9,
+            'Ноябрь': 10,
+            'Декабрь': 11
         };
         var times = [
             '11:00',

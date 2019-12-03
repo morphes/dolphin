@@ -16,7 +16,7 @@
 	</files>
 
 	<administration>
-		<menu link='index.php?option=com_payment'>Component Payment</menu>
+		<menu link="option=com_payment" img="class:search">Component Payment</menu>
 		<files folder="admin">
 			<filename>index.html</filename>
 			<filename>payment.php</filename>
