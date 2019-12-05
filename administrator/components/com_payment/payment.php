@@ -46,6 +46,8 @@ if (isset($_GET['type']) && $_GET['type'] == 'schedule') { ?>
                 </div>
             </div>
         <?php } ?>
+        <input type="submit" class="btn hasTooltip js-stools-btn-clear" title=""
+               data-original-title="Отправить">
     </form>
 <?php
 } elseif (count($_POST) && isset($_POST['type']) && $_POST['type'] == 'prices') {

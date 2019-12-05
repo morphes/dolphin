@@ -12,8 +12,16 @@ if( !defined('FormmailMakerFormLoader') ){
 
 function phpfmg_form( $sErr = false )
 {
-    $prices = file_get_contents(dirname(__FILE__) . '/prices.json');
-    $prices = @json_decode($prices, true);
+    $db = JFactory::getDbo();
+    $query = $db->getQuery(true);
+    $query->select('*')->from($db->quoteName('#__tickets'));
+    $db->setQuery($query);
+    $pricesDb = $db->loadAssocList();
+
+    $prices = [];
+    foreach($pricesDb as $price) {
+        $prices[$price['id']] = $price;
+    }
     $style  = " class='form_text' ";
     if(isset($GLOBALS['_SERVER']) && isset($GLOBALS['_SERVER']['REQUEST_URI'])) {
         if($GLOBALS['_SERVER']['REQUEST_URI'] == '/zabronirovat.html') {
