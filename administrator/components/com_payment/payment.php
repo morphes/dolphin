@@ -1,16 +1,16 @@
 <?php
 defined('_JEXEC') or die;
-if(isset($_GET['type']) && $_GET['type'] == 'saveschedule') {
-    if(isset($_GET['time']) && $times = $_GET['time']) {
-        $db    = JFactory::getDbo();
+$db = JFactory::getDbo();
+if (isset($_GET['type']) && $_GET['type'] == 'saveschedule') {
+    if (isset($_GET['time']) && $times = $_GET['time']) {
         $query = $db->getQuery(true);
         $query->delete($db->quoteName('#__time'));
         $db->setQuery($query);
 
         $result = $db->query();
         foreach ($times as $time) {
-            if($time) {
-                $item        = new stdClass();
+            if ($time) {
+                $item       = new stdClass();
                 $item->time = $time;
                 JFactory::getDbo()->insertObject('#__time', $item, 'id');
             }
@@ -23,7 +23,6 @@ if (isset($_GET['type']) && $_GET['type'] == 'schedule') { ?>
         <input type="hidden" name="option" value="com_payment"/>
         <input type="hidden" name="type" value="saveschedule"/>
         <?php
-        $db    = JFactory::getDbo();
         $query = $db->getQuery(true);
         $query->select('*')->from($db->quoteName('#__time'))->group('time');
         $db->setQuery($query);
@@ -40,22 +39,115 @@ if (isset($_GET['type']) && $_GET['type'] == 'schedule') { ?>
                 <div class="controls">
                     <input type="text" name="time[<?php echo $i; ?>]" id="jform_version_note" class="span12"
                            size="45" maxlength="255" aria-invalid="false"
-                    <?php if(isset($times[$i - 1])) { ?>
-                        value="<?php echo $times[$i - 1]->time; ?>"
-                    <?php } ?>
+                        <?php if (isset($times[$i - 1])) { ?>
+                            value="<?php echo $times[$i - 1]->time; ?>"
+                        <?php } ?>
                     >
                 </div>
             </div>
         <?php } ?>
-        <div class="btn-wrapper">
-            <a href="/administrator/index.php?option=com_payment&type=schedule">
-                <input type="submit" class="btn hasTooltip js-stools-btn-clear" title=""
-                       data-original-title="">
-
-                </input>
-            </a>
-        </div>
     </form>
+<?php
+} elseif (count($_POST) && isset($_POST['type']) && $_POST['type'] == 'prices') {
+    $updatedFields = [
+        'price',
+        'description'
+    ];
+    $fields = [];
+    foreach($_POST as $name => $postField) {
+        if(in_array($name, $updatedFields)) {
+            $fields[] = $name . ' = "'. $postField . '"';
+        }
+    }
+    $conditions = array(
+        $db->quoteName('id') . ' = ' . $_POST['id']
+    );
+    $query = $db->getQuery(true);
+    $query->update($db->quoteName('#__tickets'))->set($fields)->where($conditions);
+    $db->setQuery($query);
+    $result = $db->execute();
+    header("Location: /administrator/index.php?option=com_payment&type=prices");
+} elseif (isset($_GET['type']) && $_GET['type'] == 'prices' && isset($_GET['id'])) {
+    $query = $db->getQuery(true);
+    $query->select('*')->from($db->quoteName('#__tickets'))->where($db->quoteName('id') . ' = ' . $_GET['id']);
+    $db->setQuery($query);
+    $ticket = $db->loadAssoc();
+?>
+    <?php $fields = [
+            'description' => 'Наименование',
+            'name' => 'Техническое название',
+            'price' => 'Цена',
+            'api_id' => 'ID для интеграции с Лаймом'
+    ]; ?>
+    <form action="/administrator/index.php" method="POST">
+        <input type="hidden" name="option" value="com_payment"/>
+        <input type="hidden" name="type" value="prices"/>
+        <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>"/>
+        <?php foreach($fields as $fieldName => $fieldDescription) { ?>
+            <div class="control-label">
+                <label id="jform_version_note-lbl" for="jform_version_note" class="hasTooltip" title=""
+                       data-original-title="">
+                    <?php echo $fieldDescription; ?>
+                </label>
+            </div>
+            <div class="controls">
+                <input type="text" name="<?php echo $fieldName; ?>" id="jform_version_note" class="span12"
+                       size="45" maxlength="255" aria-invalid="false"
+                    value="<?php if(isset($ticket[$fieldName])) { echo $ticket[$fieldName]; } ?>"
+                       <?php if(in_array($fieldName, ['api_id', 'name'])) { echo 'disabled'; } ?>
+                >
+            </div>
+        <?php } ?>
+            <input type="submit" class="btn hasTooltip js-stools-btn-clear" title=""
+                    data-original-title="Отправить">
+    </form>
+<?php } elseif (isset($_GET['type']) && $_GET['type'] == 'prices') {
+    $query = $db->getQuery(true);
+    $query->select('*')->from($db->quoteName('#__tickets'));
+    $db->setQuery($query);
+    $tickets = $db->loadObjectList(); ?>
+    <table class="table table-striped" id="articleList">
+        <thead>
+        <tr>
+            <th width="1%" class="nowrap">
+                ID
+            </th>
+            <th>
+                Наименование
+            </th>
+            <th class="nowrap">
+                Стоимость
+            </th>
+            <th width="10%" class="nowrap hidden-phone">
+                Описание
+            </th>
+        </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td colspan="10">
+                </td>
+            </tr>
+        </tfoot>
+        <tbody>
+            <?php foreach($tickets as $ticket) { ?>
+                <tr>
+                    <td>
+                        <?php echo $ticket->id; ?>
+                    </td>
+                    <td>
+                        <a href="/administrator/index.php?option=com_payment&type=prices&id=<?php echo $ticket->id; ?>"><?php echo $ticket->description; ?></a>
+                    </td>
+                    <td>
+                        <?php echo $ticket->price; ?>
+                    </td>
+                    <td>
+                        <?php echo $ticket->name; ?>
+                    </td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
 <?php } else {
     if (isset($_GET['items'])) {
         $items = json_decode($_GET['items']);
@@ -233,6 +325,18 @@ if (isset($_GET['type']) && $_GET['type'] == 'schedule') { ?>
                     Управление расписанием
                 </button>
             </a>
+            <a href="/administrator/index.php?option=com_payment&type=prices">
+                <button type="button" class="btn hasTooltip js-stools-btn-clear" title=""
+                        data-original-title="Цены">
+                    Управление билетами
+                </button>
+            </a>
+        </div>
+
+        <div class="btn-wrapper">
+            <a href="/administrator/index.php?option=com_payment&type=schedule">
+
+            </a>
         </div>
 
         <div id='external-events'>
@@ -244,8 +348,8 @@ if (isset($_GET['type']) && $_GET['type'] == 'schedule') { ?>
             $db->setQuery($query);
             $times = $db->loadObjectList();
             ?>
-            <?php foreach($times as $time) { ?>
-                <?php if($time->time) { ?>
+            <?php foreach ($times as $time) { ?>
+                <?php if ($time->time) { ?>
                     <div class='fc-event'><?php echo $time->time; ?></div>
                 <?php } ?>
             <?php } ?>

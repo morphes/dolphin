@@ -15,6 +15,17 @@ $result = [];
 foreach($bookings as $booking) {
     $result[$booking->start][] = $booking->title;
 }
+
+$query = $db->getQuery(true);
+$query->select('*')->from($db->quoteName('#__time'))->group('time');
+$db->setQuery($query);
+$times = $db->loadObjectList();
+$allTimes = [];
+foreach($times as $time) {
+    if($time->time) {
+        $allTimes[] = $time->time;
+    }
+}
 ?>
 <input type="hidden" id="bookings" value='<?php echo json_encode($result); ?>'/>
 <div id='frmFormMailContainer' class="reserve_block">
@@ -70,7 +81,7 @@ foreach($bookings as $booking) {
             <li class='field_block' id='field_2_div'>
                 <label class='form_field'>
                     <span>Время представления<br>*Время и дата должны соответствовать актуальному расписанию. Расписание в верхнем правом углу экрана на желтой плашке!</span>
-                    <?php phpfmg_dropdown('field_2', "11:00|16:00|19:00|21:00"); ?>
+                    <?php phpfmg_dropdown('field_2', implode('|', $allTimes)); ?>
                 </label>
                 <div id='field_2_tip' class='instruction'></div>
             </li>
@@ -234,11 +245,14 @@ foreach($bookings as $booking) {
             'Ноябрь': 10,
             'Декабрь': 11
         };
+        <?php
+            $formatAllTimes = [];
+            foreach($allTimes as $time) {
+                $formatAllTimes[] = "'" . $time . "'";
+            }
+        ?>
         var times = [
-            '11:00',
-            '16:00',
-            '19:00',
-            '21:00'
+            <?php echo implode(',', $formatAllTimes); ?>
         ];
         var relations = {
             '19:00': [
