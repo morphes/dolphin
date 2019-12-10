@@ -8,7 +8,7 @@ include_once 'orangedata_client.php';
 require_once __DIR__ . '/QR/qrlib.php';
 require_once( dirname(__FILE__). $projectPart . '/templates/jblank/html/com_content/article/form.lib.php' );
 include_once(__DIR__ . '/letter.php');
-$domain = 'http://payment.dolphinevpatoria.ru/';
+$domain = 'http://dolphinevpatoria.ru/';
 use Lime\Request;
 
 if (isset($_POST['xmlmsg'])) {

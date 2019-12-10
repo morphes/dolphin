@@ -817,7 +817,7 @@ function    phpfmg_phpmailer( $to, $subject, $message, $from, $fromName, $cc = "
         };
     };
 
-//die('asdf');
+
     if( is_array($attachments) ){
         foreach($attachments as $f){
             $mail->AddAttachment( $f['file'], basename($f['name']) );

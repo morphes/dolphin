@@ -49,7 +49,7 @@ function phpfmg_admin_main(){
 
 function phpfmg_ajax_submit()
 {
-    $domain = 'http://payment.dolphinevpatoria.ru/';
+    $domain = 'http://dolphinevpatoria.ru/';
     if(isset($_POST['type'])) {
         $phpfmg_send = phpfmg_sendmail( $GLOBALS['form_mail'] );
         $isHideForm  = isset($phpfmg_send['isHideForm']) ? $phpfmg_send['isHideForm'] : false;
@@ -105,13 +105,16 @@ function phpfmg_ajax_submit()
 //            }
 
             $requestFactory = new TranzWarePaymentGatewayRequestFactory(
-                'http://itorg.genbank.ru/Exec',
+		'https://ipay.genbank.ru:8443/Exec',
                 'DOLPHIN',
                 $domain. 'index.php?option=com_payment',
                 $domain. 'index.php?option=com_payment',
                 $domain. 'index.php?option=com_payment',
                 'EN'
             );
+//echo "<pre>";
+//print_r($requestFactory);
+//die();
             $projectPart = '/../../../../..';
             $keyFile = dirname(__FILE__) . $projectPart . '/certificates/finalpem.pem';
             $keyPass = file_get_contents(dirname(__FILE__) . $projectPart .'/certificates/your-private-key-pass.txt');

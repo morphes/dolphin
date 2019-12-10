@@ -73,9 +73,9 @@ $params->set('direction', $direction);
 $theme = $params->get('theme', 'default');
 
 // add only if theme file exists
-//if(JFile::exists(JPATH_ROOT . DS . $css)) {
-//	$document->addStyleSheet(JURI::root(true).'/'.$css);
-//}
+if(JFile::exists(JPATH_ROOT . DS . $css)) {
+	$document->addStyleSheet(JURI::root(true).'/'.$css);
+}
 if($direction == 'rtl') { // load rtl css if exists in theme or joomla template
 	$css_rtl = JFile::stripExt($css).'_rtl.css';
 	if(JFile::exists(JPATH_ROOT . DS . $css_rtl)) {

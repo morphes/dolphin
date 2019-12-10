@@ -1,11 +1,11 @@
 *   Trying 91.227.244.89...
 * TCP_NODELAY set
-* Connected to ipay.genbank.ru (91.227.244.89) port 8444 (#0)
+* Connected to ipay.genbank.ru (91.227.244.89) port 8443 (#0)
 * ALPN, offering http/1.1
 * Cipher selection: ALL:!EXPORT:!EXPORT40:!EXPORT56:!aNULL:!LOW:!RC4:@STRENGTH
 * successfully set certificate verify locations:
-*   CAfile: /Applications/MAMP/htdocs/dolphin/templates/jblank/html/com_content/article/../../../../../certificates/dolphinevpatoria.ru.crt
-  CApath: /Applications/MAMP/htdocs/dolphin/templates/jblank/html/com_content/article/../../../../../certificates/dolphinevpatoria.ru.crt
+*   CAfile: /home/n/nazaret/dolphinevpatoria/public_html/templates/jblank/html/com_content/article/../../../../../certificates/dolphinevpatoria.ru.crt
+  CApath: /home/n/nazaret/dolphinevpatoria/public_html/templates/jblank/html/com_content/article/../../../../../certificates/dolphinevpatoria.ru.crt
 * SSL connection using TLSv1.2 / ECDHE-RSA-AES256-GCM-SHA384
 * ALPN, server accepted to use http/1.1
 * Server certificate:
@@ -15,14 +15,14 @@
 *  issuer: C=BE; O=GlobalSign nv-sa; CN=GlobalSign Organization Validation CA - SHA256 - G2
 *  SSL certificate verify result: unable to get local issuer certificate (20), continuing anyway.
 > POST /Exec HTTP/1.1
-Host: ipay.genbank.ru:8444
+Host: ipay.genbank.ru:8443
 Accept: */*
 Content-Type: application/xml
-Content-Length: 749
+Content-Length: 757
 
-* upload completely sent off: 749 out of 749 bytes
+* upload completely sent off: 757 out of 757 bytes
 < HTTP/1.1 200 OK
-< Date: Fri, 22 Nov 2019 09:59:30 GMT
+< Date: Tue, 10 Dec 2019 06:18:51 GMT
 < Server: Apache
 < Strict-Transport-Security: max-age=31536000; includeSubDomains
 < Access-Control-Allow-Origin: SAMEORIGIN
@@ -35,8 +35,9 @@ Content-Length: 749
 < Referrer-Policy: strict-origin-when-cross-origin
 < Cache-Control: no-cache
 < Pragma: no-cache
-< Set-Cookie: JSESSIONID=9F6851A8A9D5680C18FEA24470C5001E; Path=/; Secure; HttpOnly;HttpOnly;Secure
-< Content-Length: 306
+< Set-Cookie: JSESSIONID=CE929D43386C6F322C73BCA0B234E651; Path=/; Secure; HttpOnly;HttpOnly;Secure
+< Content-Length: 302
 < Content-Type: text/xml;charset=UTF8
 < 
+* Curl_http_done: called premature == 0
 * Connection #0 to host ipay.genbank.ru left intact

@@ -24,7 +24,7 @@ function letterTemplate()
     <meta charset="utf-8" />
     <title></title>
     <link rel="stylesheet" href="letter.css" />
-    <link rel="stylesheet" href="http://payment.dolphinevpatoria.ru/templates/jblank/css/_font-awesome.min.css" />
+    <link rel="stylesheet" href="http://dolphinevpatoria.ru/templates/jblank/css/_font-awesome.min.css" />
     <style type="text/css">
         * {
             font-family: "OpenSans";

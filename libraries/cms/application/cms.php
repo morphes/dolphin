@@ -253,7 +253,6 @@ class JApplicationCms extends JApplicationWeb
 	 */
 	public function execute()
 	{
-
 		// Perform application routines.
 		$this->doExecute();
 
