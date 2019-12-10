@@ -215,6 +215,7 @@ function phpfmg_linebreak(){
 }
 
 function phpfmg_sendmail( &$form_mail ) {
+
 	if( !isset($_POST["formmail_submit"]) ) return ;
 
 	$isHideForm = false ;
@@ -245,7 +246,7 @@ function phpfmg_sendmail( &$form_mail ) {
 		endif;
 		*/
     };
-
+    
 	return array(
 		'isHideForm' => $isHideForm,
 		'error'      => $sErr ,
@@ -441,6 +442,19 @@ function    sendFormMail( $form_mail, $sFileName = ""  )
     session_regenerate_id(true);
 }
 
+
+
+
+
+
+
+function sendMailToCustomer( $data )
+{
+    $result = phpfmg_phpmailer( $data['to'], $data['subject'], $data['message'], $data['from'], $data['fromName']);
+    var_dump($result);
+//    print_r($data);
+    die('----');
+}
 
 
 
@@ -795,7 +809,9 @@ function    phpfmg_phpmailer( $to, $subject, $message, $from, $fromName, $cc = "
     $mail->Subject    = $subject;
     $mail->Body       = $message;
     $mail->CharSet = $charset;
-
+//    echo "<pre>";
+//print_r($mail);
+//die();
     if( !phpfmg_is_mysite() && (defined('PHPFMG_USE_SMTP') && 'Y' == PHPFMG_USE_SMTP) ){
         $mail->IsSMTP();
     };

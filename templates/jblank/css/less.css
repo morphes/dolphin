@@ -969,7 +969,7 @@ nav.inner_nav {
   min-height: 230px;
 }
 .servises_ul li .text_serxises > a {
-  font-size: 20px;
+  font-size: 18px;
   line-height: 22px;
   max-height: 47px;
   display: inline-block;
@@ -977,7 +977,7 @@ nav.inner_nav {
   font-family: 'OpenSans-Extrabold';
 }
 .servises_ul li .text_serxises p {
-  font-size: 14px;
+  font-size: 13px;
   line-height: 17px;
   font-weight: 400;
   margin: 9px 0 14px 0;
@@ -2010,4 +2010,16 @@ ul.price_ul li .title_price span {
   font-size: 24px;
   font-family: 'OpenSans-Extrabold';
   color: #074cb3;
+}
+.link_all.tabs_ul_content a, .link_all.tabs_ul_content a span {
+  color: white !important;
+}
+.link_all.tabs_ul_content {
+  bottom: 0px !important;
+}
+.link_reserve {
+  margin-bottom: 2px;
+}
+#phpfmg_processing_gif {
+  width: 70px;
 }

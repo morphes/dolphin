@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../myhome/current/.idea/current.iml" filepath="$PROJECT_DIR$/../myhome/current/.idea/current.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/dolphin.iml" filepath="$PROJECT_DIR$/.idea/dolphin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../br/.idea/lpnew.iml" filepath="$PROJECT_DIR$/../br/.idea/lpnew.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../shirtee/.idea/shirtee.iml" filepath="$PROJECT_DIR$/../shirtee/.idea/shirtee.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../shirtee-m2/.idea/shirtee-m2.iml" filepath="$PROJECT_DIR$/../shirtee-m2/.idea/shirtee-m2.iml" />
     </modules>
   </component>
 </project>

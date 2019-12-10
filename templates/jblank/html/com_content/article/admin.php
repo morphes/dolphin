@@ -105,7 +105,7 @@ function phpfmg_ajax_submit()
 //            }
 
             $requestFactory = new TranzWarePaymentGatewayRequestFactory(
-                'https://ipay.genbank.ru:8444/Exec',
+                'http://itorg.genbank.ru/Exec',
                 'DOLPHIN',
                 $domain. 'index.php?option=com_payment',
                 $domain. 'index.php?option=com_payment',

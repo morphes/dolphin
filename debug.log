@@ -1,0 +1,42 @@
+*   Trying 91.227.244.89...
+* TCP_NODELAY set
+* Connected to ipay.genbank.ru (91.227.244.89) port 8444 (#0)
+* ALPN, offering http/1.1
+* Cipher selection: ALL:!EXPORT:!EXPORT40:!EXPORT56:!aNULL:!LOW:!RC4:@STRENGTH
+* successfully set certificate verify locations:
+*   CAfile: /Applications/MAMP/htdocs/dolphin/templates/jblank/html/com_content/article/../../../../../certificates/dolphinevpatoria.ru.crt
+  CApath: /Applications/MAMP/htdocs/dolphin/templates/jblank/html/com_content/article/../../../../../certificates/dolphinevpatoria.ru.crt
+* SSL connection using TLSv1.2 / ECDHE-RSA-AES256-GCM-SHA384
+* ALPN, server accepted to use http/1.1
+* Server certificate:
+*  subject: C=RU; ST=Republic of Crimea; L=Simferopol; O=Joint Stock Company GENBANK; CN=ipay.genbank.ru
+*  start date: Mar 22 11:11:08 2019 GMT
+*  expire date: May 12 23:59:59 2020 GMT
+*  issuer: C=BE; O=GlobalSign nv-sa; CN=GlobalSign Organization Validation CA - SHA256 - G2
+*  SSL certificate verify result: unable to get local issuer certificate (20), continuing anyway.
+> POST /Exec HTTP/1.1
+Host: ipay.genbank.ru:8444
+Accept: */*
+Content-Type: application/xml
+Content-Length: 749
+
+* upload completely sent off: 749 out of 749 bytes
+< HTTP/1.1 200 OK
+< Date: Fri, 22 Nov 2019 09:59:30 GMT
+< Server: Apache
+< Strict-Transport-Security: max-age=31536000; includeSubDomains
+< Access-Control-Allow-Origin: SAMEORIGIN
+< Access-Control-Allow-Credentials: true
+< Access-Control-Allow-Methods: POST, GET
+< Content-Security-Policy: object-src 'self'
+< X-Frame-Options: SAMEORIGIN
+< X-XSS-Protection: 1; mode=block
+< X-Content-Type-Options: nosniff
+< Referrer-Policy: strict-origin-when-cross-origin
+< Cache-Control: no-cache
+< Pragma: no-cache
+< Set-Cookie: JSESSIONID=9F6851A8A9D5680C18FEA24470C5001E; Path=/; Secure; HttpOnly;HttpOnly;Secure
+< Content-Length: 306
+< Content-Type: text/xml;charset=UTF8
+< 
+* Connection #0 to host ipay.genbank.ru left intact

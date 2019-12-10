@@ -1,0 +1,116 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "4ca52352349e9112aadc6e938bd80132",
+    "packages": [
+        {
+            "name": "morphes/limeit",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/morphes/lime.git",
+                "reference": "749a952288877086da329e65cd2bc4d4dab01666"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/morphes/lime/zipball/749a952288877086da329e65cd2bc4d4dab01666",
+                "reference": "749a952288877086da329e65cd2bc4d4dab01666",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Lime": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Dmitry Sazonov",
+                    "email": "sazon@nxt.ru"
+                }
+            ],
+            "time": "2019-09-04 11:21:21"
+        },
+        {
+            "name": "num8er/tranzware-payment-gateway",
+            "version": "1.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/num8er/TranzWarePaymentGatewayApi.git",
+                "reference": "f8720bf577fdcf62260cb1dae4bee1593dd74cff"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/num8er/TranzWarePaymentGatewayApi/zipball/f8720bf577fdcf62260cb1dae4bee1593dd74cff",
+                "reference": "f8720bf577fdcf62260cb1dae4bee1593dd74cff",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "num8er\\TranzWarePaymentGateway\\": "src/",
+                    "num8er\\TranzWarePaymentGateway\\Requests\\": "src/requests/",
+                    "num8er\\TranzWarePaymentGateway\\Handlers\\": "src/handlers/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anar K. Jafarov",
+                    "role": "Developer",
+                    "email": "anar.k.jafarov@gmail.com",
+                    "homepage": "http://anarjafarov.me"
+                }
+            ],
+            "description": "Library for working with TranzWare Payment Gateway",
+            "time": "2018-07-20T14:20:22+00:00"
+        },
+        {
+            "name": "orangedata/orangedata-client",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/orangedata-official/PHP-OrangeData-official.git",
+                "reference": "c1a945e4d5e45bf658aeda8e035de71877683d98"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/orangedata-official/PHP-OrangeData-official/zipball/c1a945e4d5e45bf658aeda8e035de71877683d98",
+                "reference": "c1a945e4d5e45bf658aeda8e035de71877683d98",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "orangedata\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "patyrsa",
+                    "email": "patyrsa@com.gmail"
+                }
+            ],
+            "description": "Example client API class for OrangeData project",
+            "time": "2017-11-21 11:21:56"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "morphes/limeit": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

@@ -1,0 +1,65 @@
+[01-Nov-2019 18:22:36 Europe/Moscow] PHP Warning:  PHP Startup: Unable to load dynamic library '/Applications/MAMP/bin/php/php5.5.38/lib/php/extensions/no-debug-non-zts-20121212/redis.so' - dlopen(/Applications/MAMP/bin/php/php5.5.38/lib/php/extensions/no-debug-non-zts-20121212/redis.so, 9): image not found in Unknown on line 0
+[01-Nov-2019 18:22:36 Europe/Moscow] PHP Warning:  PHP Startup: Unable to load dynamic library '/Applications/MAMP/htdocs/myhome/phpredis/modules/redis.so' - dlopen(/Applications/MAMP/htdocs/myhome/phpredis/modules/redis.so, 9): Symbol not found: _php_session_update_timestamp
+  Referenced from: /Applications/MAMP/htdocs/myhome/phpredis/modules/redis.so
+  Expected in: flat namespace
+ in /Applications/MAMP/htdocs/myhome/phpredis/modules/redis.so in Unknown on line 0
+[01-Nov-2019 18:22:36 Europe/Moscow] PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/local/php5/lib/php/extensions/no-debug-non-zts-20160303/redis.so' - dlopen(/usr/local/php5/lib/php/extensions/no-debug-non-zts-20160303/redis.so, 9): Symbol not found: _php_session_update_timestamp
+  Referenced from: /usr/local/php5/lib/php/extensions/no-debug-non-zts-20160303/redis.so
+  Expected in: flat namespace
+ in /usr/local/php5/lib/php/extensions/no-debug-non-zts-20160303/redis.so in Unknown on line 0
+[01-Nov-2019 18:38:20 Europe/Moscow] PHP Warning:  mysqli_errno() expects parameter 1 to be mysqli, boolean given in /Applications/MAMP/htdocs/dolphin/libraries/joomla/database/driver/mysqli.php on line 987
+[01-Nov-2019 18:38:20 Europe/Moscow] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, boolean given in /Applications/MAMP/htdocs/dolphin/libraries/joomla/database/driver/mysqli.php on line 1001
+[01-Nov-2019 18:38:20 Europe/Moscow] PHP Warning:  session_start(): Cannot send session cache limiter - headers already sent (output started at /Applications/MAMP/htdocs/dolphin/libraries/joomla/database/driver/mysqli.php:987) in /Applications/MAMP/htdocs/dolphin/libraries/joomla/session/handler/native.php on line 258
+[01-Nov-2019 23:30:41 Europe/Moscow] PHP Warning:  PHP Startup: Unable to load dynamic library '/Applications/MAMP/bin/php/php5.5.38/lib/php/extensions/no-debug-non-zts-20121212/redis.so' - dlopen(/Applications/MAMP/bin/php/php5.5.38/lib/php/extensions/no-debug-non-zts-20121212/redis.so, 9): image not found in Unknown on line 0
+[01-Nov-2019 23:30:41 Europe/Moscow] PHP Warning:  PHP Startup: Unable to load dynamic library '/Applications/MAMP/htdocs/myhome/phpredis/modules/redis.so' - dlopen(/Applications/MAMP/htdocs/myhome/phpredis/modules/redis.so, 9): Symbol not found: _php_session_update_timestamp
+  Referenced from: /Applications/MAMP/htdocs/myhome/phpredis/modules/redis.so
+  Expected in: flat namespace
+ in /Applications/MAMP/htdocs/myhome/phpredis/modules/redis.so in Unknown on line 0
+[01-Nov-2019 23:30:41 Europe/Moscow] PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/local/php5/lib/php/extensions/no-debug-non-zts-20160303/redis.so' - dlopen(/usr/local/php5/lib/php/extensions/no-debug-non-zts-20160303/redis.so, 9): Symbol not found: _php_session_update_timestamp
+  Referenced from: /usr/local/php5/lib/php/extensions/no-debug-non-zts-20160303/redis.so
+  Expected in: flat namespace
+ in /usr/local/php5/lib/php/extensions/no-debug-non-zts-20160303/redis.so in Unknown on line 0
+[01-Nov-2019 23:31:05 Europe/Moscow] PHP Warning:  mysqli_errno() expects parameter 1 to be mysqli, boolean given in /Applications/MAMP/htdocs/dolphin/libraries/joomla/database/driver/mysqli.php on line 987
+[01-Nov-2019 23:31:05 Europe/Moscow] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, boolean given in /Applications/MAMP/htdocs/dolphin/libraries/joomla/database/driver/mysqli.php on line 1001
+[01-Nov-2019 23:31:05 Europe/Moscow] PHP Warning:  session_start(): Cannot send session cache limiter - headers already sent (output started at /Applications/MAMP/htdocs/dolphin/libraries/joomla/database/driver/mysqli.php:987) in /Applications/MAMP/htdocs/dolphin/libraries/joomla/session/handler/native.php on line 258
+[01-Nov-2019 23:35:15 Europe/Moscow] PHP Warning:  PHP Startup: Unable to load dynamic library '/Applications/MAMP/bin/php/php5.5.38/lib/php/extensions/no-debug-non-zts-20121212/redis.so' - dlopen(/Applications/MAMP/bin/php/php5.5.38/lib/php/extensions/no-debug-non-zts-20121212/redis.so, 9): image not found in Unknown on line 0
+[01-Nov-2019 23:35:15 Europe/Moscow] PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/local/php5/lib/php/extensions/no-debug-non-zts-20160303/redis.so' - dlopen(/usr/local/php5/lib/php/extensions/no-debug-non-zts-20160303/redis.so, 9): Symbol not found: _php_session_update_timestamp
+  Referenced from: /usr/local/php5/lib/php/extensions/no-debug-non-zts-20160303/redis.so
+  Expected in: flat namespace
+ in /usr/local/php5/lib/php/extensions/no-debug-non-zts-20160303/redis.so in Unknown on line 0
+[01-Nov-2019 23:35:15 Europe/Moscow] PHP Warning:  PHP Startup: Unable to load dynamic library '/Applications/MAMP/htdocs/myhome/phpredis/modules/redis.so' - dlopen(/Applications/MAMP/htdocs/myhome/phpredis/modules/redis.so, 9): Symbol not found: _php_session_update_timestamp
+  Referenced from: /Applications/MAMP/htdocs/myhome/phpredis/modules/redis.so
+  Expected in: flat namespace
+ in /Applications/MAMP/htdocs/myhome/phpredis/modules/redis.so in Unknown on line 0
+[04-Nov-2019 10:33:46 Europe/Moscow] PHP Warning:  PHP Startup: Unable to load dynamic library '/Applications/MAMP/bin/php/php5.5.38/lib/php/extensions/no-debug-non-zts-20121212/redis.so' - dlopen(/Applications/MAMP/bin/php/php5.5.38/lib/php/extensions/no-debug-non-zts-20121212/redis.so, 9): image not found in Unknown on line 0
+[04-Nov-2019 10:33:46 Europe/Moscow] PHP Warning:  PHP Startup: Unable to load dynamic library '/Applications/MAMP/htdocs/myhome/phpredis/modules/redis.so' - dlopen(/Applications/MAMP/htdocs/myhome/phpredis/modules/redis.so, 9): Symbol not found: _php_session_update_timestamp
+  Referenced from: /Applications/MAMP/htdocs/myhome/phpredis/modules/redis.so
+  Expected in: flat namespace
+ in /Applications/MAMP/htdocs/myhome/phpredis/modules/redis.so in Unknown on line 0
+[04-Nov-2019 10:33:46 Europe/Moscow] PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/local/php5/lib/php/extensions/no-debug-non-zts-20160303/redis.so' - dlopen(/usr/local/php5/lib/php/extensions/no-debug-non-zts-20160303/redis.so, 9): Symbol not found: _php_session_update_timestamp
+  Referenced from: /usr/local/php5/lib/php/extensions/no-debug-non-zts-20160303/redis.so
+  Expected in: flat namespace
+ in /usr/local/php5/lib/php/extensions/no-debug-non-zts-20160303/redis.so in Unknown on line 0
+[04-Nov-2019 12:36:55 Europe/Moscow] PHP Fatal error:  Function 'call' doesn't exist in /Applications/MAMP/htdocs/originalm2/Magento-CE-2.3.2-2019-06-13-03-23-52/vendor/zendframework/zend-soap/src/Server.php on line 994
+[04-Nov-2019 13:56:37 Europe/Moscow] PHP Warning:  mysqli_errno() expects parameter 1 to be mysqli, boolean given in /Applications/MAMP/htdocs/dolphin/libraries/joomla/database/driver/mysqli.php on line 987
+[04-Nov-2019 13:56:37 Europe/Moscow] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, boolean given in /Applications/MAMP/htdocs/dolphin/libraries/joomla/database/driver/mysqli.php on line 1001
+[04-Nov-2019 13:56:37 Europe/Moscow] PHP Warning:  session_start(): Cannot send session cache limiter - headers already sent (output started at /Applications/MAMP/htdocs/dolphin/libraries/joomla/database/driver/mysqli.php:987) in /Applications/MAMP/htdocs/dolphin/libraries/joomla/session/handler/native.php on line 258
+[04-Nov-2019 21:19:09 Europe/Moscow] PHP Warning:  Missing argument 1 for JDatabaseQuery::select(), called in /Applications/MAMP/htdocs/dolphin/administrator/components/com_payment/payment.php on line 23 and defined in /Applications/MAMP/htdocs/dolphin/libraries/joomla/database/query.php on line 1242
+[04-Nov-2019 21:19:09 Europe/Moscow] PHP Notice:  Undefined variable: columns in /Applications/MAMP/htdocs/dolphin/libraries/joomla/database/query.php on line 1248
+[04-Nov-2019 21:20:46 Europe/Moscow] PHP Parse error:  syntax error, unexpected end of file in /Applications/MAMP/htdocs/dolphin/administrator/components/com_payment/payment.php on line 169
+[04-Nov-2019 22:13:27 Europe/Moscow] PHP Fatal error:  Using $this when not in object context in /Applications/MAMP/htdocs/dolphin/templates/jblank/html/com_content/article/form_kupit.php on line 2
+[04-Nov-2019 22:19:13 Europe/Moscow] PHP Fatal error:  Using $this when not in object context in /Applications/MAMP/htdocs/dolphin/templates/jblank/html/com_content/article/form_kupit.php on line 2
+[04-Nov-2019 22:19:32 Europe/Moscow] PHP Fatal error:  Call to a member function getBodyClasses() on a non-object in /Applications/MAMP/htdocs/dolphin/templates/jblank/html/com_content/article/form_kupit.php on line 1
+[04-Nov-2019 22:19:44 Europe/Moscow] PHP Fatal error:  Call to a member function getBodyClasses() on a non-object in /Applications/MAMP/htdocs/dolphin/templates/jblank/html/com_content/article/form_kupit.php on line 2
+[06-Nov-2019 19:00:19 Europe/Moscow] PHP Warning:  mail() expects parameter 4 to be string, array given in /Applications/MAMP/htdocs/dolphin/index.php on line 16
+[06-Nov-2019 19:00:19 Europe/Moscow] PHP Warning:  mail() expects parameter 4 to be string, array given in /Applications/MAMP/htdocs/dolphin/index.php on line 16
+[06-Nov-2019 19:05:21 Europe/Moscow] PHP Parse error:  syntax error, unexpected '$headers' (T_VARIABLE) in /Applications/MAMP/htdocs/dolphin/index.php on line 16
+[06-Nov-2019 19:07:44 Europe/Moscow] PHP Warning:  PHP Startup: Unable to load dynamic library '/Applications/MAMP/bin/php/php5.5.38/lib/php/extensions/no-debug-non-zts-20121212/redis.so' - dlopen(/Applications/MAMP/bin/php/php5.5.38/lib/php/extensions/no-debug-non-zts-20121212/redis.so, 9): image not found in Unknown on line 0
+[06-Nov-2019 19:07:44 Europe/Moscow] PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/local/php5/lib/php/extensions/no-debug-non-zts-20160303/redis.so' - dlopen(/usr/local/php5/lib/php/extensions/no-debug-non-zts-20160303/redis.so, 9): Symbol not found: _php_session_update_timestamp
+  Referenced from: /usr/local/php5/lib/php/extensions/no-debug-non-zts-20160303/redis.so
+  Expected in: flat namespace
+ in /usr/local/php5/lib/php/extensions/no-debug-non-zts-20160303/redis.so in Unknown on line 0
+[06-Nov-2019 19:07:44 Europe/Moscow] PHP Warning:  PHP Startup: Unable to load dynamic library '/Applications/MAMP/htdocs/myhome/phpredis/modules/redis.so' - dlopen(/Applications/MAMP/htdocs/myhome/phpredis/modules/redis.so, 9): Symbol not found: _php_session_update_timestamp
+  Referenced from: /Applications/MAMP/htdocs/myhome/phpredis/modules/redis.so
+  Expected in: flat namespace
+ in /Applications/MAMP/htdocs/myhome/phpredis/modules/redis.so in Unknown on line 0

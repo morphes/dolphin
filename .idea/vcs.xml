@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../br" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../m2" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../murata-ps.com-prelive/web" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../murata-ps.com/web" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../myhome.ru" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../myhome/current" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../shirtee" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../shirtee-apiautotests" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../shirtee-m2" vcs="Git" />
+  </component>
+</project>

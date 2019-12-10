@@ -36,7 +36,7 @@ $info    = $params->get('info_block_position', 0);
 			<?php $images = json_decode($this->item->images); ?> <?php echo $images->image_intro_alt; ?>
 		</a>
 	</div>
-	<div class="link_all">
+	<div class="link_all tabs_ul_content">
 		<?php echo JLayoutHelper::render('joomla.content.services.blog_style_default_readmore', $this->item); ?>
 	</div>
 
@@ -46,7 +46,7 @@ $info    = $params->get('info_block_position', 0);
 
 
 
-<?php if ($useDefList && ($info == 1 || $info == 2)) : ?>
+<?php if (isset($useDefList) && $useDefList && ($info == 1 || $info == 2)) : ?>
 	<?php echo JLayoutHelper::render('joomla.content.info_block.block', array('item' => $this->item, 'params' => $params, 'position' => 'below')); ?>
 <?php  endif; ?>
 

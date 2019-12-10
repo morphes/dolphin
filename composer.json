@@ -1,0 +1,8 @@
+{
+    "minimum-stability": "dev",
+    "require": {
+        "num8er/tranzware-payment-gateway": "^1.1",
+        "orangedata/orangedata-client": "*",
+        "morphes/limeit": "dev-master"
+    }
+}

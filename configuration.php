@@ -9,13 +9,13 @@ class JConfig {
 	public $captcha = '0';
 	public $list_limit = '20';
 	public $access = '1';
-	public $debug = '0';
+	public $debug = '1';
 	public $debug_lang = '0';
 	public $dbtype = 'mysqli';
 	public $host = '127.0.0.1';
 	public $user = 'root';
 	public $password = 'everest1024';
-	public $db = 'dolphin';
+	public $db = 'dolphin1';
 	public $dbprefix = 'jmTw_';
 	public $live_site = '';
 	public $secret = 'dUPfXdlz7R68YEk2';

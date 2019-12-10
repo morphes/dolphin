@@ -16,10 +16,10 @@ JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
 ?>
 
 
-<a href="/zabronirovat.html" class="link_reserve">
-    Купить билет
-</a>
+<!--<a href="/kupit.html" class="link_reserve first">-->
+<!--    Купить билет-->
+<!--</a>-->
 <a href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($displayData->slug, $displayData->catid, $displayData->language)); ?>"
-   itemprop="url">
+   itemprop="url" class="link_reserve">
     <span>Узнать больше</span></a>
 

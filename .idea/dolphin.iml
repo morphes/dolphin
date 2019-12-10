@@ -4,5 +4,9 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="lpnew" />
+    <orderEntry type="module" module-name="current" />
+    <orderEntry type="module" module-name="shirtee" />
+    <orderEntry type="module" module-name="shirtee-m2" />
   </component>
 </module>
