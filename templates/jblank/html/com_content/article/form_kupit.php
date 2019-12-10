@@ -26,6 +26,8 @@ foreach($times as $time) {
         $allTimes[] = $time->time;
     }
 }
+$childrenTitle = $prices[10]['description'];
+$adultTitle = $prices[8]['description'];
 ?>
 <input type="hidden" id="bookings" value='<?php echo json_encode($result); ?>'/>
 <div id='frmFormMailContainer' class="reserve_block">
@@ -140,14 +142,14 @@ foreach($times as $time) {
             <div id="show" style="display:none">
                 <li class='field_block' id='field_8_div' price="<?php echo $prices[8]['price']; ?>">
                     <label class='form_field'>
-                        <span>Кол-во взрослых (12+)</span>
+                        <span><?php echo $adultTitle; ?></span>
                         <?php phpfmg_dropdown('field_8', "0|1=1,default|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|&gt;20"); ?>
                     </label>
                     <div id='field_8_tip' class='instruction'></div>
                 </li>
                 <li class='field_block' id='field_10_div' price="<?php echo $prices[10]['price']; ?>">
                     <label class='form_field'>
-                        <span>Детские места (5-11)</span>
+                        <span><?php echo $childrenTitle; ?></span>
                         <?php phpfmg_dropdown('field_10', "0=0,default|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|&gt;20"); ?>
                     </label>
                     <div id='field_10_tip' class='instruction'></div>
