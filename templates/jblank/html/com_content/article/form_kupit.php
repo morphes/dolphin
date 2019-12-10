@@ -246,10 +246,10 @@ foreach($times as $time) {
             'Декабрь': 11
         };
         <?php
-            $formatAllTimes = [];
-            foreach($allTimes as $time) {
-                $formatAllTimes[] = "'" . $time . "'";
-            }
+        $formatAllTimes = [];
+        foreach($allTimes as $time) {
+            $formatAllTimes[] = "'" . $time . "'";
+        }
         ?>
         var times = [
             <?php echo implode(',', $formatAllTimes); ?>
@@ -333,13 +333,19 @@ foreach($times as $time) {
             var dayField = $('#field_3');
 
             var now = new Date();
+
             var selectedDate = now.getFullYear() + '-' + ('0' + (currentMonth + 1)).slice(-2) + '-' + dayField.val();
 
             timeField.find('option').remove();
+            var cont = true;
             if(bookings[selectedDate]) {
-                bookings[selectedDate].forEach(function(item) {
-                    timeField.append('<option value="' + item + '">' + item + '</option>')
-                });
+                if(bookings[selectedDate].length == 1 && bookings[selectedDate][0] == 'Отмена бронирования' ) {
+                    cont = false;
+                } else {
+                    bookings[selectedDate].forEach(function(item) {
+                        timeField.append('<option value="' + item + '">' + item + '</option>')
+                    });
+                }
             } else {
                 times.forEach(function(item){
                     timeField.append('<option value="' + item + '">' + item + '</option>')
@@ -354,6 +360,7 @@ foreach($times as $time) {
             if (timeField.val() in relations) {
                 var rel = relations[timeField.val()];
             }
+            var disabledCurrentDate = false;
             if(!muteDays) {
                 for (var d = new Date(now.getFullYear(), currentMonth, 1); d <= dateTo; d.setDate(d.getDate() + 1)) {
 
@@ -374,6 +381,7 @@ foreach($times as $time) {
 
                     var dayOption = pad(currentDate.getDate());
                     var dat = currentDate.getFullYear() + '-' + ('0' + (currentDate.getMonth()+1)).slice(-2) + '-' + ('0' + currentDate.getDate()).slice(-2);
+
                     var cancelDay = false;
                     if(bookings[dat]) {
                         bookings[dat].forEach(function(item) {
@@ -382,13 +390,26 @@ foreach($times as $time) {
                             }
                         });
                     }
+
+                    if(cancelDay && currentDate.getDate() == now.getDate()) {
+                        disabledCurrentDate = true;
+                    }
                     if(!cancelDay) {
+                        var selected = '';
+                        if(disabledCurrentDate && dayOption > now.getDate()) {
+                            selected = 'selected';
+                            disabledCurrentDate = false;
+
+                            times.forEach(function(item){
+                                timeField.append('<option value="' + item + '">' + item + '</option>')
+                            });
+                        }
                         if (rel.length) {
                             if (in_array(currentDate.getDay(), rel) != -1) {
-                                dayField.append('<option value="' + dayOption + '">' + dayOption + '</option>')
+                                dayField.append('<option value="' + dayOption + '"' + selected + '>' + dayOption + '</option>')
                             }
                         } else {
-                            dayField.append('<option value="' + dayOption + '">' + dayOption + '</option>')
+                            dayField.append('<option value="' + dayOption + '"' + selected + '>' + dayOption + '</option>')
                         }
                     }
                 }

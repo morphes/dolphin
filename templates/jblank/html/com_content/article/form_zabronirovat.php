@@ -5,7 +5,16 @@ define('JPATH_BASE', '../../../../..');//point to joomla root
 define('DS', DIRECTORY_SEPARATOR);
 require_once(JPATH_BASE . DS . 'includes' . DS . 'defines.php');
 require_once(JPATH_BASE . DS . 'includes' . DS . 'framework.php');
+
 $db = JFactory::getDbo();
+$query = $db->getQuery(true);
+$query->select('*')->from($db->quoteName('#__booking'))->group('start, title');
+$db->setQuery($query);
+$bookings = $db->loadObjectList();
+$result = [];
+foreach($bookings as $booking) {
+    $result[$booking->start][] = $booking->title;
+}
 
 $query = $db->getQuery(true);
 $query->select('*')->from($db->quoteName('#__time'))->group('time');
@@ -19,6 +28,7 @@ foreach($times as $time) {
 }
 ?>
 
+    <input type="hidden" id="bookings" value='<?php echo json_encode($result); ?>'/>
     <div id='frmFormMailContainer' class="reserve_block">
         <div class="title_reserve">
             <a href="/">
@@ -223,6 +233,7 @@ foreach($times as $time) {
     </div>
     <script type="text/javascript">
         $(document).ready(function () {
+            var bookings = JSON.parse($('#bookings').val());
             var months = {
                 'Январь': 1,
                 'Февраль': 2,
@@ -237,10 +248,10 @@ foreach($times as $time) {
                 'Декабрь': 11
             };
             <?php
-                $formatAllTimes = [];
-                foreach($allTimes as $time) {
-                    $formatAllTimes[] = "'" . $time . "'";
-                }
+            $formatAllTimes = [];
+            foreach($allTimes as $time) {
+                $formatAllTimes[] = "'" . $time . "'";
+            }
             ?>
             var times = [
                 <?php echo implode(',', $formatAllTimes); ?>
@@ -267,8 +278,12 @@ foreach($times as $time) {
                 filterDates();
             });
 
-            $('#field_2').change(function () {
-                filterDates();
+//        $('#field_2').change(function () {
+//            filterDates();
+//        });
+
+            $('#field_3').change(function () {
+                filterDates(1);
             });
 
             $('#field_7').change(function () {
@@ -312,45 +327,93 @@ foreach($times as $time) {
                 }
             }
 
-            function filterDates() {
+            function filterDates(muteDays) {
                 var now = new Date();
                 var currentMonth = months[$('#field_4').val()];
                 var dateTo = new Date(now.getFullYear(), currentMonth + 1, 0);
                 var timeField = $('#field_2');
-
                 var dayField = $('#field_3');
-                dayField.find('option').remove();
+
+                var now = new Date();
+
+                var selectedDate = now.getFullYear() + '-' + ('0' + (currentMonth + 1)).slice(-2) + '-' + dayField.val();
+
+                timeField.find('option').remove();
+                var cont = true;
+                if(bookings[selectedDate]) {
+                    if(bookings[selectedDate].length == 1 && bookings[selectedDate][0] == 'Отмена бронирования' ) {
+                        cont = false;
+                    } else {
+                        bookings[selectedDate].forEach(function(item) {
+                            timeField.append('<option value="' + item + '">' + item + '</option>')
+                        });
+                    }
+                } else {
+                    times.forEach(function(item){
+                        timeField.append('<option value="' + item + '">' + item + '</option>')
+                    });
+                }
+
+                if(!muteDays) {
+                    dayField.find('option').remove();
+                }
 
                 var rel = [];
                 if (timeField.val() in relations) {
                     var rel = relations[timeField.val()];
                 }
+                var disabledCurrentDate = false;
+                if(!muteDays) {
+                    for (var d = new Date(now.getFullYear(), currentMonth, 1); d <= dateTo; d.setDate(d.getDate() + 1)) {
 
-                for (var d = new Date(now.getFullYear(), currentMonth, 1); d <= dateTo; d.setDate(d.getDate() + 1)) {
+                        var currentDate = new Date(d);
 
-                    var currentDate = new Date(d);
-
-                    function pad(n) {
-                        return n < 10 ? '0' + n : n
-                    }
-
-                    function in_array(needle, haystack) {
-                        var found = 0;
-                        for (var i = 0, len = haystack.length; i < len; i++) {
-                            if (haystack[i] == needle) return i;
-                            found++;
+                        function pad(n) {
+                            return n < 10 ? '0' + n : n
                         }
-                        return -1;
-                    }
 
-                    var dayOption = pad(currentDate.getDate());
-
-                    if (rel.length) {
-                        if (in_array(currentDate.getDay(), rel) != -1) {
-                            dayField.append('<option value="' + dayOption + '">' + dayOption + '</option>')
+                        function in_array(needle, haystack) {
+                            var found = 0;
+                            for (var i = 0, len = haystack.length; i < len; i++) {
+                                if (haystack[i] == needle) return i;
+                                found++;
+                            }
+                            return -1;
                         }
-                    } else {
-                        dayField.append('<option value="' + dayOption + '">' + dayOption + '</option>')
+
+                        var dayOption = pad(currentDate.getDate());
+                        var dat = currentDate.getFullYear() + '-' + ('0' + (currentDate.getMonth()+1)).slice(-2) + '-' + ('0' + currentDate.getDate()).slice(-2);
+
+                        var cancelDay = false;
+                        if(bookings[dat]) {
+                            bookings[dat].forEach(function(item) {
+                                if(item == 'Отмена бронирования') {
+                                    cancelDay = true;
+                                }
+                            });
+                        }
+
+                        if(cancelDay && currentDate.getDate() == now.getDate()) {
+                            disabledCurrentDate = true;
+                        }
+                        if(!cancelDay) {
+                            var selected = '';
+                            if(disabledCurrentDate && dayOption > now.getDate()) {
+                                selected = 'selected';
+                                disabledCurrentDate = false;
+
+                                times.forEach(function(item){
+                                    timeField.append('<option value="' + item + '">' + item + '</option>')
+                                });
+                            }
+                            if (rel.length) {
+                                if (in_array(currentDate.getDay(), rel) != -1) {
+                                    dayField.append('<option value="' + dayOption + '"' + selected + '>' + dayOption + '</option>')
+                                }
+                            } else {
+                                dayField.append('<option value="' + dayOption + '"' + selected + '>' + dayOption + '</option>')
+                            }
+                        }
                     }
                 }
             }
