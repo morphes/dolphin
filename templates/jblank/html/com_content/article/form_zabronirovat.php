@@ -332,6 +332,7 @@ $adultTitle = $prices[8]['description'];
 
             function filterDates(muteDays) {
                 var now = new Date();
+
                 var currentMonth = months[$('#field_4').val()];
                 var year = now.getFullYear();
                 if(currentMonth < 10) {
@@ -341,7 +342,8 @@ $adultTitle = $prices[8]['description'];
                 var timeField = $('#field_2');
                 var dayField = $('#field_3');
 
-                var currentM = (currentMonth.length > 1) ? ('0' + (currentMonth + 1)).slice(-2) : ('0' + (currentMonth + 1));
+
+                var currentM = (currentMonth > 9) ? ('0' + (currentMonth + 1)).slice(-2) : ('0' + (currentMonth + 1));
                 var selectedDate = year + '-' + currentM + '-' + dayField.val();
 
                 timeField.find('option').remove();
@@ -388,7 +390,7 @@ $adultTitle = $prices[8]['description'];
                         }
 
                         var dayOption = pad(currentDate.getDate());
-                        var currentM = (currentMonth.length > 1) ? ('0' + (currentMonth + 1)).slice(-2) : ('0' + (currentMonth + 1));
+                        var currentM = (currentMonth > 9) ? ('0' + (currentMonth + 1)).slice(-2) : ('0' + (currentMonth + 1));
                         var dat = currentDate.getFullYear() + '-' + currentM + '-' + ('0' + currentDate.getDate()).slice(-2);
 
                         var cancelDay = false;
@@ -405,10 +407,9 @@ $adultTitle = $prices[8]['description'];
                         }
                         if(!cancelDay) {
                             var selected = '';
-                            if(disabledCurrentDate && dayOption > now.getDate()) {
+                            if(disabledCurrentDate && dayOption > now.getDate() && now.getMonth() == currentDate.getMonth()) {
                                 selected = 'selected';
                                 disabledCurrentDate = false;
-
                                 if(bookings[dat]) {
                                     bookings[dat].forEach(function(item) {
                                         timeField.append('<option value="' + item + '">' + item + '</option>')
@@ -419,13 +420,7 @@ $adultTitle = $prices[8]['description'];
                                     });
                                 }
                             }
-                            if (rel.length) {
-                                if (in_array(currentDate.getDay(), rel) != -1) {
-                                    dayField.append('<option value="' + dayOption + '"' + selected + '>' + dayOption + '</option>')
-                                }
-                            } else {
-                                dayField.append('<option value="' + dayOption + '"' + selected + '>' + dayOption + '</option>')
-                            }
+                            dayField.append('<option value="' + dayOption + '"' + selected + '>' + dayOption + '</option>')
                         }
                     }
                 }
