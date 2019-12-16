@@ -405,7 +405,7 @@ $adultTitle = $prices[8]['description'];
                     }
                     if(!cancelDay) {
                         var selected = '';
-                        if(disabledCurrentDate && dayOption > now.getDate() && now.getMonth() == currentDate.getMonth()) {
+                        if(disabledCurrentDate && dayOption > now.getDate()) {
                             selected = 'selected';
                             disabledCurrentDate = false;
                             if(bookings[dat]) {
