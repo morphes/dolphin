@@ -422,6 +422,12 @@ $adultTitle = $prices[8]['description'];
                     }
                 }
             }
+            var selectedDate = year + '-' + currentM + '-' + dayField.val();
+            if(bookings[selectedDate] && !$('#field_2 option').length) {
+                bookings[selectedDate].forEach(function(item) {
+                    timeField.append('<option value="' + item + '">' + item + '</option>')
+                });
+            }
         }
     });
 </script>
