@@ -237,10 +237,11 @@ $adultTitle = $prices[8]['description'];
         $(document).ready(function () {
             var bookings = JSON.parse($('#bookings').val());
             var months = {
-                'Январь': 1,
-                'Февраль': 2,
-                'Март': 3,
-                'Апрель': 4,
+                'Январь': 0,
+                'Февраль': 1,
+                'Март': 2,
+                'Апрель': 3,
+                'Май': 4,
                 'Июнь': 5,
                 'Июль': 6,
                 'Август': 7,
@@ -332,13 +333,16 @@ $adultTitle = $prices[8]['description'];
             function filterDates(muteDays) {
                 var now = new Date();
                 var currentMonth = months[$('#field_4').val()];
-                var dateTo = new Date(now.getFullYear(), currentMonth + 1, 0);
+                var year = now.getFullYear();
+                if(currentMonth < 10) {
+                    year = year + 1;
+                }
+                var dateTo = new Date(year, currentMonth + 1, 0);
                 var timeField = $('#field_2');
                 var dayField = $('#field_3');
 
-                var now = new Date();
-
-                var selectedDate = now.getFullYear() + '-' + ('0' + (currentMonth + 1)).slice(-2) + '-' + dayField.val();
+                var currentM = (currentMonth.length > 1) ? ('0' + (currentMonth + 1)).slice(-2) : (currentMonth + 1);
+                var selectedDate = year + '-' + currentM + '-' + dayField.val();
 
                 timeField.find('option').remove();
                 var cont = true;
@@ -366,7 +370,7 @@ $adultTitle = $prices[8]['description'];
                 }
                 var disabledCurrentDate = false;
                 if(!muteDays) {
-                    for (var d = new Date(now.getFullYear(), currentMonth, 1); d <= dateTo; d.setDate(d.getDate() + 1)) {
+                    for (var d = new Date(year, currentMonth, 1); d <= dateTo; d.setDate(d.getDate() + 1)) {
 
                         var currentDate = new Date(d);
 
@@ -384,7 +388,8 @@ $adultTitle = $prices[8]['description'];
                         }
 
                         var dayOption = pad(currentDate.getDate());
-                        var dat = currentDate.getFullYear() + '-' + ('0' + (currentDate.getMonth()+1)).slice(-2) + '-' + ('0' + currentDate.getDate()).slice(-2);
+                        var currentM = (currentMonth.length > 1) ? ('0' + (currentMonth + 1)).slice(-2) : (currentMonth + 1);
+                        var dat = currentDate.getFullYear() + '-' + currentM + '-' + ('0' + currentDate.getDate()).slice(-2);
 
                         var cancelDay = false;
                         if(bookings[dat]) {

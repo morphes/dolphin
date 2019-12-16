@@ -163,7 +163,9 @@ if (isset($_GET['type']) && $_GET['type'] == 'schedule') { ?>
         foreach ($items as $item) {
             $date        = new stdClass();
             $date->title = $item->title;
-            $date->start = $item->date;
+            $time = strtotime($item->date);
+            $newformat = date('Y-m-d',$time);
+            $date->start = $newformat;
             JFactory::getDbo()->insertObject('#__booking', $date, 'id');
         }
         echo 'success';
