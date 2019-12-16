@@ -54,8 +54,18 @@ function phpfmg_ajax_submit()
         $phpfmg_send = phpfmg_sendmail( $GLOBALS['form_mail'] );
         $isHideForm  = isset($phpfmg_send['isHideForm']) ? $phpfmg_send['isHideForm'] : false;
         if($_POST['type'] == 'kupit') {
-            $prices = file_get_contents(dirname(__FILE__).'/prices.json');
-            $prices = @json_decode($prices, true);
+$db = JFactory::getDbo();
+    $query = $db->getQuery(true);
+    $query->select('*')->from($db->quoteName('#__tickets'));
+    $db->setQuery($query);
+    $pricesDb = $db->loadAssocList();
+
+    $prices = [];
+    foreach($pricesDb as $price) {
+        $prices[$price['id']] = $price;
+    }
+
+
             $totalPrice = 0;
             $totalQty = 0;
             foreach($_POST as $keyField => $postField) {
@@ -75,7 +85,6 @@ function phpfmg_ajax_submit()
 
             $data = $_POST;
 
-            $db = JFactory::getDbo();
             $query = $db->getQuery(true);
             $order = new stdClass();
             $order->fio = $data['field_0'];

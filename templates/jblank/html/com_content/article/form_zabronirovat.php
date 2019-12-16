@@ -404,9 +404,15 @@ $adultTitle = $prices[8]['description'];
                                 selected = 'selected';
                                 disabledCurrentDate = false;
 
-                                times.forEach(function(item){
-                                    timeField.append('<option value="' + item + '">' + item + '</option>')
-                                });
+                                if(bookings[dat]) {
+                                    bookings[dat].forEach(function(item) {
+                                        timeField.append('<option value="' + item + '">' + item + '</option>')
+                                    });
+                                } else {
+                                    times.forEach(function(item){
+                                        timeField.append('<option value="' + item + '">' + item + '</option>')
+                                    });
+                                }
                             }
                             if (rel.length) {
                                 if (in_array(currentDate.getDay(), rel) != -1) {
