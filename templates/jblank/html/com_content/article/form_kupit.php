@@ -341,7 +341,7 @@ $adultTitle = $prices[8]['description'];
             var dayField = $('#field_3');
 
 
-            var currentM = (currentMonth.length > 1) ? ('0' + (currentMonth + 1)).slice(-2) : (currentMonth + 1);
+            var currentM = (currentMonth.length > 1) ? ('0' + (currentMonth + 1)).slice(-2) : ('0' + (currentMonth + 1));
             var selectedDate = year + '-' + currentM + '-' + dayField.val();
 
             timeField.find('option').remove();
@@ -388,7 +388,7 @@ $adultTitle = $prices[8]['description'];
                     }
 
                     var dayOption = pad(currentDate.getDate());
-                    var currentM = (currentMonth.length > 1) ? ('0' + (currentMonth + 1)).slice(-2) : (currentMonth + 1);
+                    var currentM = (currentMonth.length > 1) ? ('0' + (currentMonth + 1)).slice(-2) : ('0' + (currentMonth + 1));
                     var dat = currentDate.getFullYear() + '-' + currentM + '-' + ('0' + currentDate.getDate()).slice(-2);
 
                     var cancelDay = false;
