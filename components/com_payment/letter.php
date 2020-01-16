@@ -29,8 +29,7 @@ function template($string, $params)
 
 function letterTemplate()
 {
-    return '
-<!DOCTYPE html>
+    return '<!DOCTYPE html>
 
 <html>
 
@@ -40,9 +39,6 @@ function letterTemplate()
     <link rel="stylesheet" href="letter.css" />
     <link rel="stylesheet" href="http://dolphinevpatoria.ru/templates/jblank/css/_font-awesome.min.css" />
     <style type="text/css">
-        * {
-            font-family: "OpenSans";
-        }
         #logo-right {
             text-align: right;
             font-size: 18px;
@@ -133,7 +129,7 @@ function letterTemplate()
         </td>
     </tr>
 </table>
-<table id="additional-info-table"
+<table id="additional-info-table">
     <tr>
         <td colspan="2">
             <div class="center-positioned">
@@ -154,7 +150,6 @@ function letterTemplate()
                         Оплата прошла успешно, Ваш билет представлен ниже на данной странице.
                     </span>
             </div>
-            <br/>
         </td>
     </tr>
     <tr class="wight-bkg">
@@ -168,8 +163,11 @@ function letterTemplate()
         </td>
     </tr>
     <tr class="wight-bkg">
-        <td>[tickets]</td>        
+        <td>[tickets]</td>
         <td>
+            <span class="aligned-darkgrey-text">Идентификатор заказа: [order_id]</span><br/><br/>
+            <span class="aligned-darkgrey-text">Кол-во взрослых билетов: [adult_count]</span><br/><br/>
+            <span class="aligned-darkgrey-text">Кол-во детских билетов: [child_count]</span><br/><br/>
             <span class="aligned-darkgrey-text">Дата: [date]</span><br/><br/>
             <span class="aligned-darkgrey-text">Время: [time]</span><br/><br/>
             <span class="aligned-darkgrey-text">Цена: [price]</span><br/><br/>
@@ -180,7 +178,7 @@ function letterTemplate()
     </tr>
     <tr>
         <td colspan="2">
-            <br/>
+            <br/><br/><br/>
             <div class="center-positioned">
                 ВНИМАНИЕ! БИЛЕТ ДЕЙСТВИТЕЛЕН ДЛЯ ОДНОКРАТНОГО ПРОХОДА
             </div>

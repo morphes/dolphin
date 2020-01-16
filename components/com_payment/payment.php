@@ -4,7 +4,6 @@ JFactory::getDocument()->setTitle("");
 $projectPart = '/../..';
 require_once(dirname(__FILE__) . $projectPart . '/vendor/autoload.php');
 use Lime\Request;
-use Spipu\Html2Pdf\Html2Pdf;
 
 if (isset($_GET['pdf']) && isset($_GET['order_id'])) {
     $orderId = $_GET['order_id'];
