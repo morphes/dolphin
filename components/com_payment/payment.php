@@ -131,12 +131,12 @@ if (isset($_POST['xmlmsg'])) {
                     $params['order_id']    = $order->id;
                     $params['child_count'] = $order->show_child;
                     $params['adult_count'] = $order->show_adult;
+
                     $filename              = md5($order->id);
-                    $params['pdf']         = $filename;
+                    $params['pdf_link']         = 'index.php?option=com_payment&pdf='.md5($order->id . 'secret_hash').'&order_id='.$order->id;
 
                     $letterTemplate = letterTemplate();
                     $content        = template($letterTemplate, $params);
-
 
                     $query      = $db->getQuery(true);
                     $fields     = [

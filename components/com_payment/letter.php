@@ -39,6 +39,10 @@ function letterTemplate()
     <link rel="stylesheet" href="letter.css" />
     <link rel="stylesheet" href="http://dolphinevpatoria.ru/templates/jblank/css/_font-awesome.min.css" />
     <style type="text/css">
+        * {
+            font-family: "OpenSans";
+        }
+
         #logo-right {
             text-align: right;
             font-size: 18px;
@@ -150,6 +154,10 @@ function letterTemplate()
                         Оплата прошла успешно, Ваш билет представлен ниже на данной странице.
                     </span>
             </div>
+<div class="center-positioned">
+
+<span id="middle-text"><a href="[domain][pdf_link]">Распечатать билет (PDF)</a></span>
+</div>		
         </td>
     </tr>
     <tr class="wight-bkg">
