@@ -3,6 +3,20 @@
 function template($string, $params)
 {
     $result = $string;
+    $params['tickets'] = '';
+
+    foreach($params['qrs'] as $qr) {
+        $string_t = '<div class="center-positioned"><img src="[domain][qr]"/></div>';
+        foreach(array_keys($qr) as $key) {
+            $string_t = preg_replace(
+                '/\\[' . preg_quote($key, '/') . '\\]/'
+                , $qr[$key]
+                , $string_t
+            );
+        }
+        $params['tickets'] .= $string_t;
+    }
+    unset($params['qrs']);
     foreach(array_keys($params) as $key) {
         $result = preg_replace(
             '/\\[' . preg_quote($key, '/') . '\\]/'
@@ -135,11 +149,12 @@ function letterTemplate()
             <div class="center-positioned">
                 <br/><br/><br/><br/>
                 <span id="middle-text">
-                        Благодарим за использование нашего онлайн сериса покупки билетов.
+                        Благодарим за использование нашего онлайн сервиса покупки билетов.
                         <br/>
                         Оплата прошла успешно, Ваш билет представлен ниже на данной странице.
                     </span>
             </div>
+            <br/>
         </td>
     </tr>
     <tr class="wight-bkg">
@@ -153,11 +168,7 @@ function letterTemplate()
         </td>
     </tr>
     <tr class="wight-bkg">
-        <td>
-            <div class="center-positioned">
-                <img src="[domain][qr]"/>
-            </div>
-        </td>
+        <td>[tickets]</td>        
         <td>
             <span class="aligned-darkgrey-text">Дата: [date]</span><br/><br/>
             <span class="aligned-darkgrey-text">Время: [time]</span><br/><br/>
@@ -169,7 +180,7 @@ function letterTemplate()
     </tr>
     <tr>
         <td colspan="2">
-            <br/><br/><br/>
+            <br/>
             <div class="center-positioned">
                 ВНИМАНИЕ! БИЛЕТ ДЕЙСТВИТЕЛЕН ДЛЯ ОДНОКРАТНОГО ПРОХОДА
             </div>

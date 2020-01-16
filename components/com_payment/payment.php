@@ -1,44 +1,68 @@
 <?php
 defined('_JEXEC') or die;
 JFactory::getDocument()->setTitle("");
-
 $projectPart = '/../..';
-require_once( dirname(__FILE__). $projectPart . '/vendor/autoload.php' );
+require_once(dirname(__FILE__) . $projectPart . '/vendor/autoload.php');
+use Lime\Request;
+use Spipu\Html2Pdf\Html2Pdf;
+
+if (isset($_GET['pdf']) && isset($_GET['order_id'])) {
+    $orderId = $_GET['order_id'];
+    $pdf     = $_GET['pdf'];
+    if (md5($orderId . 'secret_hash') == $pdf) {
+
+        $db    = JFactory::getDbo();
+        $query = $db->getQuery(true);
+        $query->select('*');
+        $query->from($db->quoteName('#__order'));
+        $query->where($db->quoteName('id') . ' = ' . (int)$orderId);
+        $db->setQuery($query);
+        $order = $db->loadObject();
+
+        $mpdf = new \Mpdf\Mpdf();
+        $mpdf->WriteHTML($order->pdf);
+        $mpdf->Output();
+    } else {
+        echo 'error';
+    }
+    die();
+}
+
 include_once 'orangedata_client.php';
 require_once __DIR__ . '/QR/qrlib.php';
-require_once( dirname(__FILE__). $projectPart . '/templates/jblank/html/com_content/article/form.lib.php' );
+require_once(dirname(__FILE__) . $projectPart . '/templates/jblank/html/com_content/article/form.lib.php');
 include_once(__DIR__ . '/letter.php');
 $domain = 'http://dolphinevpatoria.ru/';
-use Lime\Request;
 
 if (isset($_POST['xmlmsg'])) {
     $xmlMsg         = $_POST['xmlmsg'];
     $paymentMessage = (array)simplexml_load_string($xmlMsg);
-    if(isset($paymentMessage['OrderStatus'])) {
+    if (isset($paymentMessage['OrderStatus'])) {
         $status = $paymentMessage['OrderStatus'];
-        if($status == 'CANCELED') {
+
+        if ($status == 'CANCELED') {
             echo 'Заказ отменен';
         }
 
-        if($status == 'APPROVED' || $status == 'ERROR') {
+        if ($status == 'APPROVED' || $status == 'ERROR') {
             $api_url = 12003;
 
-            $sign_pkey = getcwd() . '/certificates/orange_live/signpkey.pem';
-            $ssl_client_key = getcwd() . '/certificates/orange_live/9110001780.key';
-            $ssl_client_crt = getcwd() . '/certificates/orange_live/9110001780.crt';
-            $ssl_ca_cert = getcwd() . '/certificates/orange_live/cacert.pem';
+            $sign_pkey           = getcwd() . '/certificates/orange_live/signpkey.pem';
+            $ssl_client_key      = getcwd() . '/certificates/orange_live/9110001780.key';
+            $ssl_client_crt      = getcwd() . '/certificates/orange_live/9110001780.crt';
+            $ssl_ca_cert         = getcwd() . '/certificates/orange_live/cacert.pem';
             $ssl_client_crt_pass = '';
-            $inn = '9110001780';
-            $phone = '79889917443';
+            $inn                 = '9110001780';
+            $phone               = '79889917443';
 
-            if(isset($paymentMessage['OrderDescription'])) {
+            if (isset($paymentMessage['OrderDescription'])) {
                 $orderNumber = (int)explode('#', $paymentMessage['OrderDescription'])[1];
-                if($orderNumber) {
-                    $db = JFactory::getDbo();
+                if ($orderNumber) {
+                    $db    = JFactory::getDbo();
                     $query = $db->getQuery(true);
                     $query->select('*');
                     $query->from($db->quoteName('#__order'));
-                    $query->where($db->quoteName('id') . ' = '. $orderNumber);
+                    $query->where($db->quoteName('id') . ' = ' . $orderNumber);
                     $db->setQuery($query);
                     $order = $db->loadObject();
 
@@ -50,20 +74,20 @@ if (isset($_POST['xmlmsg'])) {
                     $prices = @json_decode($prices);
 
                     $pricesByKeys = [];
-                    foreach($prices as $key => $value) {
+                    foreach ($prices as $key => $value) {
                         $pricesByKeys[$value->name] = $value->price;
                     }
 
-                    foreach($order as $key => $value) {
-                        if($value) {
-                            if(isset($pricesByKeys[$key])) {
+                    foreach ($order as $key => $value) {
+                        if ($value) {
+                            if (isset($pricesByKeys[$key])) {
                                 $byer->add_position_to_order($value, $pricesByKeys[$key], 2, 'Билет');
                             }
                         }
                     }
                     $byer->add_payment_to_order(2, $order->total_price);
 
-                    $byer->add_agent_to_order(127,[], 'Operation', [], [], 'Name', 'ulitsa Adress, dom 7', 3123011520, []);
+                    $byer->add_agent_to_order(127, [], 'Operation', [], [], 'Name', 'ulitsa Adress, dom 7', 3123011520, []);
 
                     $result = $byer->send_order();
 
@@ -77,43 +101,64 @@ if (isset($_POST['xmlmsg'])) {
                         ->setProcessingId('161');
 
                     $items = [];
-                    foreach($prices as $key => $value) {
-                        if(property_exists($order, $value->name) && $order->{$value->name}) {
+                    foreach ($prices as $key => $value) {
+                        if (property_exists($order, $value->name) && $order->{$value->name}) {
                             $items[] = [
-                                'id' => 0,
-                                'name' => $value->description,
-                                'price' => $value->price * 100,
+                                'id'     => 0,
+                                'name'   => $value->description,
+                                'price'  => $value->price * 100,
                                 'limeid' => $value->api_id,
                                 'amount' => $order->{$value->name}
                             ];
                         }
                     }
 
-                    $qrs = $request->order($items);
-                    foreach($qrs as $key => $qr) {
-                        $qrFilename = dirname(__FILE__). $projectPart .  "/media/" . $orderNumber . "-" . $key . ".png";
+                    $qrs    = $request->order($items);
+                    $params = [];
+                    foreach ($qrs as $key => $qr) {
+                        $qrFilename = dirname(__FILE__) . $projectPart . "/media/" . $orderNumber . "-" . $key . ".png";
 
-                        $qrFilePath = str_replace(dirname(__FILE__). $projectPart . '/', '', $qrFilename);
+                        $qrFilePath = str_replace(dirname(__FILE__) . $projectPart . '/', '', $qrFilename);
                         QRcode::png($qr, $qrFilename, QR_ECLEVEL_L, 10);
-                        $params = [
-                            'qr' => $qrFilePath,
-                            'domain' => $domain,
-                            'date' => $order->day . ' ' . $order->month,
-                            'price' => $order->total_price,
-                            'time' => $order->time
+                        $params['qrs'][] = [
+                            'qr'     => $qrFilePath,
+                            'domain' => $domain
                         ];
-                        $letterTemplate = letterTemplate();
-                        $content = template($letterTemplate, $params);
-                        var_dump($content);
-                        die();
-                        mailAttachments( $order->email, "Ваш билет", $content);
                     }
-                    header('Location: '.$domain.'templates/jblank/html/com_content/article/success.php', true, 301);
+                    $params['domain']      = $domain;
+                    $params['date']        = $order->day . ' ' . $order->month;
+                    $params['price']       = $order->total_price;
+                    $params['time']        = $order->time;
+                    $params['order_id']    = $order->id;
+                    $params['child_count'] = $order->show_child;
+                    $params['adult_count'] = $order->show_adult;
+                    $filename              = md5($order->id);
+                    $params['pdf']         = $filename;
+
+                    $letterTemplate = letterTemplate();
+                    $content        = template($letterTemplate, $params);
+
+
+                    $query      = $db->getQuery(true);
+                    $fields     = [
+                        $db->quoteName('pdf') . ' = ' . $db->quote($content)
+                    ];
+                    $conditions = [
+                        $db->quoteName('id') . ' = ' . $order->id
+                    ];
+                    $query->update($db->quoteName('#__order'))->set($fields)->where($conditions);
+                    $db->setQuery($query);
+                    $result = $db->execute();
+
+                    mailAttachments($order->email, "Ваш билет", $content);
+                    mailAttachments('evpatoriiskydelfinary@yandex.ru', "Заказанный билет", $content);
+
+                    header('Location: ' . $domain . 'templates/jblank/html/com_content/article/success.php', true, 301);
                     exit;
                 }
             }
         }
-        if($status == 'DECLINED') {
+        if ($status == 'DECLINED') {
             header('Location: /templates/jblank/html/com_content/article/failed.php', true, 301);
         }
     }
